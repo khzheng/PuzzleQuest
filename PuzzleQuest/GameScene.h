@@ -8,6 +8,12 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+@class Level;
+
 @interface GameScene : SKScene
+
+@property (nonatomic, strong) Level *level;
+
+- (void)addSpritesForCookies:(NSSet *)cookies;
 
 @end

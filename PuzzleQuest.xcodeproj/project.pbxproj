@@ -17,6 +17,8 @@
 		EBFF54921B390B59006972D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54901B390B59006972D7 /* LaunchScreen.xib */; };
 		EBFF549E1B390B59006972D7 /* PuzzleQuestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF549D1B390B59006972D7 /* PuzzleQuestTests.m */; };
 		EBFF54AC1B3910BA006972D7 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54AB1B3910BA006972D7 /* Sprites.atlas */; };
+		EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54AE1B3911E5006972D7 /* Cookie.m */; };
+		EBFF54B21B3912B6006972D7 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54B11B3912B6006972D7 /* Level.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,10 @@
 		EBFF549C1B390B59006972D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFF549D1B390B59006972D7 /* PuzzleQuestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PuzzleQuestTests.m; sourceTree = "<group>"; };
 		EBFF54AB1B3910BA006972D7 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
+		EBFF54AD1B3911E5006972D7 /* Cookie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cookie.h; sourceTree = "<group>"; };
+		EBFF54AE1B3911E5006972D7 /* Cookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cookie.m; sourceTree = "<group>"; };
+		EBFF54B01B3912B6006972D7 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		EBFF54B11B3912B6006972D7 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,10 @@
 				EBFF548E1B390B59006972D7 /* Images.xcassets */,
 				EBFF54901B390B59006972D7 /* LaunchScreen.xib */,
 				EBFF547C1B390B59006972D7 /* Supporting Files */,
+				EBFF54AD1B3911E5006972D7 /* Cookie.h */,
+				EBFF54AE1B3911E5006972D7 /* Cookie.m */,
+				EBFF54B01B3912B6006972D7 /* Level.h */,
+				EBFF54B11B3912B6006972D7 /* Level.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -232,10 +242,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBFF54B21B3912B6006972D7 /* Level.m in Sources */,
 				EBFF548A1B390B59006972D7 /* GameViewController.m in Sources */,
 				EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */,
 				EBFF54851B390B59006972D7 /* GameScene.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
+				EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,13 @@
 //
 
 #import "GameViewController.h"
+#import "Level.h"
 #import "GameScene.h"
+
+@interface GameViewController ()
+@property (nonatomic, strong) Level *level;
+@property (nonatomic, strong) GameScene *scene;
+@end
 
 @implementation SKScene (Unarchive)
 
@@ -30,35 +36,50 @@
 
 @implementation GameViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    /* Sprite Kit applies additional optimizations to improve rendering performance */
-    skView.ignoresSiblingOrder = YES;
+    SKView *skView = (SKView *)self.view;
+    skView.multipleTouchEnabled = NO;
     
-    // Create and configure the scene.
-    // we're not loading from a file
-//    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
+    // Create and configure scene
+    self.scene = [GameScene sceneWithSize:skView.bounds.size];
+    self.scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    GameScene *scene = [[GameScene alloc] initWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    // Load level
+    self.level = [[Level alloc] init];
+    self.scene.level = self.level;
     
-    // Present the scene.
-    [skView presentScene:scene];
+    // Present scene
+    [skView presentScene:self.scene];
+    
+    // start game!
+    [self beginGame];
+
+//    // Configure the view.
+//    SKView * skView = (SKView *)self.view;
+//    skView.showsFPS = YES;
+//    skView.showsNodeCount = YES;
+//    /* Sprite Kit applies additional optimizations to improve rendering performance */
+//    skView.ignoresSiblingOrder = YES;
+//    
+//    // Create and configure the scene.
+//    // we're not loading from a file
+////    GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
+//    
+//    GameScene *scene = [[GameScene alloc] initWithSize:skView.bounds.size];
+//    scene.scaleMode = SKSceneScaleModeAspectFill;
+//    
+//    // Present the scene.
+//    [skView presentScene:scene];
 }
 
-- (BOOL)shouldAutorotate
-{
+- (BOOL)shouldAutorotate {
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
-{
+- (NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
     } else {
@@ -66,14 +87,22 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)beginGame {
+    [self shuffle];
+}
+
+- (void)shuffle {
+    NSSet *newCookies = [self.level shuffle];
+    [self.scene addSpritesForCookies:newCookies];
 }
 
 @end
