@@ -14,9 +14,11 @@ static const CGFloat TileWidth = 32.0;
 static const CGFloat TileHeight = 36.0;
 
 @interface GameScene ()
-@property (strong, nonatomic) SKNode *gameLayer;    // base layer for all other layers, is centered on screen
-@property (strong, nonatomic) SKNode *cookiesLayer; // cookies get added here
-@property (strong, nonatomic) SKNode *tilesLayer;   // tiles get added here
+@property (strong, nonatomic) SKNode *gameLayer;        // base layer for all other layers, is centered on screen
+@property (strong, nonatomic) SKNode *cookiesLayer;     // cookies get added here
+@property (strong, nonatomic) SKNode *tilesLayer;       // tiles get added here
+@property (assign, nonatomic) NSInteger swipeFromColumn;// records cookie swiped
+@property (assign, nonatomic) NSInteger swipeFromRow;   // records cookie swiped
 
 @end
 
@@ -42,6 +44,8 @@ static const CGFloat TileHeight = 36.0;
         self.cookiesLayer = [SKNode node];
         self.cookiesLayer.position = layerPosition;
         [self.gameLayer addChild:self.cookiesLayer];
+        
+        self.swipeFromColumn = self.swipeFromRow = NSNotFound;
     }
     
     return self;
@@ -68,11 +72,107 @@ static const CGFloat TileHeight = 36.0;
     }
 }
 
+#pragma mark - Touch methods
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    // convert touch location to a point relative to cookiesLayer
+    CGPoint location = [touch locationInNode:self.cookiesLayer];
+    
+    NSInteger column, row;
+    if ([self convertPoint:location toColumn:&column row:&row]) {
+        // ensure there is a cookie at the column, row
+        Cookie *cookie = [self.level cookieAtColumn:column row:row];
+        if (cookie != nil) {
+            // record swiped column, row
+            self.swipeFromColumn = column;
+            self.swipeFromRow = row;
+        }
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    // swipe began outside of valid area || game already swapped cookie so ignore
+    if (self.swipeFromColumn == NSNotFound) return;
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self.cookiesLayer];
+    
+    NSInteger column, row;
+    if ([self convertPoint:location toColumn:&column row:&row]) {
+        // figure out direction of swipe
+        NSInteger horizontalDelta = 0, verticalDelta = 0;
+        if (column < self.swipeFromColumn)      // left swipe
+            horizontalDelta = -1;
+        else if (column > self.swipeFromColumn) // right swipe
+            horizontalDelta = 1;
+        else if (row < self.swipeFromRow)       // down swipe
+            verticalDelta = -1;
+        else if (row > self.swipeFromRow)       // up swipe
+            verticalDelta = 1;
+        
+        if (horizontalDelta != 0 || verticalDelta != 0) {
+            // try swap
+            [self trySwapHorizontal:horizontalDelta vertical:verticalDelta];
+            
+            // reset swipeFromColumn
+            self.swipeFromColumn = NSNotFound;
+        }
+    }
+}
+
 #pragma mark - Helper methods
 
 // returns center
 - (CGPoint)pointForColumn:(NSInteger)column row:(NSInteger)row {
     return CGPointMake(column * TileWidth + TileWidth/2, row * TileHeight + TileHeight/2);
+}
+
+// return: YES if point is within the grid and stores the corresponding column and row
+- (BOOL)convertPoint:(CGPoint)point toColumn:(NSInteger *)column row:(NSInteger *)row {
+    // ensure column and row pointers are non-nil
+    NSParameterAssert(column);
+    NSParameterAssert(row);
+    
+    if (point.x >= 0 && point.x < NumColumns * TileWidth &&
+        point.y >= 0 && point.y < NumRows * TileHeight) {
+        
+        *column = point.x / TileWidth;
+        *row = point.y / TileHeight;
+        return YES;
+    } else {
+        *column = NSNotFound;
+        *row = NSNotFound;
+        return NO;
+    }
+}
+
+- (void)trySwapHorizontal:(NSInteger)horizontalDelta vertical:(NSInteger)verticalDelta {
+    // calculate column, row of cookie to swap with
+    NSInteger toColumn = self.swipeFromColumn + horizontalDelta;
+    NSInteger toRow = self.swipeFromRow + verticalDelta;
+    
+    // ensure toColumn, toRow is within the grid
+    if (toColumn < 0 || toColumn >= NumColumns) return;
+    if (toRow < 0 || toRow >= NumRows)  return;
+    
+    // ensure there is a cookie at toColumn, toRow
+    Cookie *toCookie = [self.level cookieAtColumn:toColumn row:toRow];
+    if (toCookie == nil)  return;
+    
+    Cookie *fromCookie = [self.level cookieAtColumn:self.swipeFromColumn row:self.swipeFromRow];
+    
+    // just log for now
+    NSLog(@"*** swapping %@ with %@", fromCookie, toCookie);
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.swipeFromColumn = self.swipeFromRow = NSNotFound;
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self touchesEnded:touches withEvent:event];
 }
 
 //-(void)didMoveToView:(SKView *)view {
