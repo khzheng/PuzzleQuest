@@ -16,6 +16,7 @@
 		EBFF548F1B390B59006972D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFF548E1B390B59006972D7 /* Images.xcassets */; };
 		EBFF54921B390B59006972D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54901B390B59006972D7 /* LaunchScreen.xib */; };
 		EBFF549E1B390B59006972D7 /* PuzzleQuestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF549D1B390B59006972D7 /* PuzzleQuestTests.m */; };
+		EBFF54AC1B3910BA006972D7 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54AB1B3910BA006972D7 /* Sprites.atlas */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		EBFF54971B390B59006972D7 /* PuzzleQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuzzleQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFF549C1B390B59006972D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFF549D1B390B59006972D7 /* PuzzleQuestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PuzzleQuestTests.m; sourceTree = "<group>"; };
+		EBFF54AB1B3910BA006972D7 /* Sprites.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Sprites.atlas; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				EBFF54861B390B59006972D7 /* GameScene.sks */,
 				EBFF54881B390B59006972D7 /* GameViewController.h */,
 				EBFF54891B390B59006972D7 /* GameViewController.m */,
+				EBFF54AB1B3910BA006972D7 /* Sprites.atlas */,
 				EBFF548B1B390B59006972D7 /* Main.storyboard */,
 				EBFF548E1B390B59006972D7 /* Images.xcassets */,
 				EBFF54901B390B59006972D7 /* LaunchScreen.xib */,
@@ -211,6 +214,7 @@
 				EBFF548F1B390B59006972D7 /* Images.xcassets in Resources */,
 				EBFF54871B390B59006972D7 /* GameScene.sks in Resources */,
 				EBFF548D1B390B59006972D7 /* Main.storyboard in Resources */,
+				EBFF54AC1B3910BA006972D7 /* Sprites.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +430,7 @@
 				EBFF54A31B390B59006972D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EBFF54A41B390B59006972D7 /* Build configuration list for PBXNativeTarget "PuzzleQuestTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +439,7 @@
 				EBFF54A61B390B59006972D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
