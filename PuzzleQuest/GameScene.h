@@ -15,5 +15,6 @@
 @property (nonatomic, strong) Level *level;
 
 - (void)addSpritesForCookies:(NSSet *)cookies;
+- (void)addTiles;
 
 @end

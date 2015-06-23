@@ -51,6 +51,9 @@
     self.level = [[Level alloc] init];
     self.scene.level = self.level;
     
+    // Load tiles
+    [self.scene addTiles];
+    
     // Present scene
     [skView presentScene:self.scene];
     

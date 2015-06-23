@@ -19,6 +19,7 @@
 		EBFF54AC1B3910BA006972D7 /* Sprites.atlas in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54AB1B3910BA006972D7 /* Sprites.atlas */; };
 		EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54AE1B3911E5006972D7 /* Cookie.m */; };
 		EBFF54B21B3912B6006972D7 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54B11B3912B6006972D7 /* Level.m */; };
+		EBFF54B51B391928006972D7 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54B41B391928006972D7 /* Tile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		EBFF54AE1B3911E5006972D7 /* Cookie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cookie.m; sourceTree = "<group>"; };
 		EBFF54B01B3912B6006972D7 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		EBFF54B11B3912B6006972D7 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
+		EBFF54B31B391928006972D7 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
+		EBFF54B41B391928006972D7 /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				EBFF54AE1B3911E5006972D7 /* Cookie.m */,
 				EBFF54B01B3912B6006972D7 /* Level.h */,
 				EBFF54B11B3912B6006972D7 /* Level.m */,
+				EBFF54B31B391928006972D7 /* Tile.h */,
+				EBFF54B41B391928006972D7 /* Tile.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */,
 				EBFF54851B390B59006972D7 /* GameScene.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
+				EBFF54B51B391928006972D7 /* Tile.m in Sources */,
 				EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

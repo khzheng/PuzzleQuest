@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Cookie.h"
+
+@class Cookie;
+@class Tile;
 
 static const NSInteger NumColumns = 9;
 static const NSInteger NumRows = 9;
@@ -16,5 +18,6 @@ static const NSInteger NumRows = 9;
 
 - (NSSet *)shuffle;
 - (Cookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
+- (Tile *)tileAtColumn:(NSInteger)column row:(NSInteger)row;
 
 @end

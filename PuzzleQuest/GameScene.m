@@ -14,10 +14,10 @@ static const CGFloat TileWidth = 32.0;
 static const CGFloat TileHeight = 36.0;
 
 @interface GameScene ()
-// base layer for all other layers, is centered on screen
-@property (strong, nonatomic) SKNode *gameLayer;
-// cookies get added here
-@property (strong, nonatomic) SKNode *cookiesLayer;
+@property (strong, nonatomic) SKNode *gameLayer;    // base layer for all other layers, is centered on screen
+@property (strong, nonatomic) SKNode *cookiesLayer; // cookies get added here
+@property (strong, nonatomic) SKNode *tilesLayer;   // tiles get added here
+
 @end
 
 @implementation GameScene
@@ -35,9 +35,12 @@ static const CGFloat TileHeight = 36.0;
         
         CGPoint layerPosition = CGPointMake(-TileWidth * NumColumns / 2, -TileHeight * NumRows / 2);
         
+        self.tilesLayer = [SKNode node];
+        self.tilesLayer.position = layerPosition;
+        [self.gameLayer addChild:self.tilesLayer];
+        
         self.cookiesLayer = [SKNode node];
         self.cookiesLayer.position = layerPosition;
-        
         [self.gameLayer addChild:self.cookiesLayer];
     }
     
@@ -50,6 +53,18 @@ static const CGFloat TileHeight = 36.0;
         sprite.position = [self pointForColumn:cookie.column row:cookie.row];
         [self.cookiesLayer addChild:sprite];
         cookie.sprite = sprite;
+    }
+}
+
+- (void)addTiles {
+    for (NSInteger row = 0; row < NumRows; row++) {
+        for (NSInteger column = 0; column < NumColumns; column++) {
+            if ([self.level tileAtColumn:column row:row] != nil) {
+                SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Tile"];
+                sprite.position = [self pointForColumn:column row:row];
+                [self.tilesLayer addChild:sprite];
+            }
+        }
     }
 }
 
