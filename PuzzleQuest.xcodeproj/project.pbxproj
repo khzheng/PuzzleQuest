@@ -20,6 +20,7 @@
 		EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54AE1B3911E5006972D7 /* Cookie.m */; };
 		EBFF54B21B3912B6006972D7 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54B11B3912B6006972D7 /* Level.m */; };
 		EBFF54B51B391928006972D7 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54B41B391928006972D7 /* Tile.m */; };
+		EBFF54B81B3A4869006972D7 /* Swap.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54B71B3A4869006972D7 /* Swap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		EBFF54B11B3912B6006972D7 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 		EBFF54B31B391928006972D7 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tile.h; sourceTree = "<group>"; };
 		EBFF54B41B391928006972D7 /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tile.m; sourceTree = "<group>"; };
+		EBFF54B61B3A4869006972D7 /* Swap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Swap.h; sourceTree = "<group>"; };
+		EBFF54B71B3A4869006972D7 /* Swap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Swap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				EBFF54B11B3912B6006972D7 /* Level.m */,
 				EBFF54B31B391928006972D7 /* Tile.h */,
 				EBFF54B41B391928006972D7 /* Tile.m */,
+				EBFF54B61B3A4869006972D7 /* Swap.h */,
+				EBFF54B71B3A4869006972D7 /* Swap.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				EBFF548A1B390B59006972D7 /* GameViewController.m in Sources */,
 				EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */,
 				EBFF54851B390B59006972D7 /* GameScene.m in Sources */,
+				EBFF54B81B3A4869006972D7 /* Swap.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
 				EBFF54B51B391928006972D7 /* Tile.m in Sources */,
 				EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */,

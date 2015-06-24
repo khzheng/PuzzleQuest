@@ -9,6 +9,7 @@
 #import "Level.h"
 #import "Cookie.h"
 #import "Tile.h"
+#import "Swap.h"
 
 @implementation Level {
     Cookie *_cookies[NumColumns][NumRows];  // keeps track of Cookie objects
@@ -45,6 +46,24 @@
     return _tiles[column][row];
 }
 
+- (void)performSwap:(Swap *)swap {
+    // tmp store columns, rows
+    NSInteger columnA = swap.cookieA.column;
+    NSInteger rowA = swap.cookieA.row;
+    NSInteger columnB = swap.cookieB.column;
+    NSInteger rowB = swap.cookieB.row;
+    
+    // swap column, row and update _cookies array
+    
+    _cookies[columnA][rowA] = swap.cookieB;
+    swap.cookieB.column = columnA;
+    swap.cookieB.row = rowA;
+    
+    _cookies[columnB][rowB] = swap.cookieA;
+    swap.cookieA.column = columnB;
+    swap.cookieA.row = rowB;
+}
+
 #pragma mark - Helper methods
 
 - (NSSet *)createInitialCookies {
@@ -60,7 +79,7 @@
                 cookie.row = row;
                 cookie.column = column;
                 
-                _cookies[row][column] = cookie;
+                _cookies[column][row] = cookie;
                 [set addObject:cookie];
             }
         }

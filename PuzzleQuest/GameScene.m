@@ -9,6 +9,7 @@
 #import "GameScene.h"
 #import "Level.h"
 #import "Cookie.h"
+#import "Swap.h"
 
 static const CGFloat TileWidth = 32.0;
 static const CGFloat TileHeight = 36.0;
@@ -122,6 +123,14 @@ static const CGFloat TileHeight = 36.0;
     }
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.swipeFromColumn = self.swipeFromRow = NSNotFound;
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self touchesEnded:touches withEvent:event];
+}
+
 #pragma mark - Helper methods
 
 // returns center
@@ -164,15 +173,33 @@ static const CGFloat TileHeight = 36.0;
     Cookie *fromCookie = [self.level cookieAtColumn:self.swipeFromColumn row:self.swipeFromRow];
     
     // just log for now
-    NSLog(@"*** swapping %@ with %@", fromCookie, toCookie);
+    if (self.swipeHandler != nil) {
+        NSLog(@"*** swapping %@ with %@", fromCookie, toCookie);
+        Swap *swap = [[Swap alloc] init];
+        swap.cookieA = fromCookie;
+        swap.cookieB = toCookie;
+        
+        self.swipeHandler(swap);
+    }
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.swipeFromColumn = self.swipeFromRow = NSNotFound;
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesEnded:touches withEvent:event];
+// animates the swap
+// dispatch_block_t is shorthand for a block that returns void and takes no parameters
+- (void)animateSwap:(Swap *)swap completion:(dispatch_block_t)completion {
+    // move cookie you started with a bit higher
+    swap.cookieA.sprite.zPosition = 100;
+    swap.cookieB.sprite.zPosition = 90;
+    
+    const NSTimeInterval duration = 0.3;
+    
+    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:duration];
+    moveA.timingMode = SKActionTimingEaseOut;
+    // after animation completes, completion handler is called
+    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, [SKAction runBlock:completion]]]];
+    
+    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:duration];
+    moveB.timingMode = SKActionTimingEaseOut;
+    [swap.cookieB.sprite runAction:moveB];
 }
 
 //-(void)didMoveToView:(SKView *)view {

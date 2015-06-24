@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import "Level.h"
 #import "GameScene.h"
+#import "Swap.h"
 
 @interface GameViewController ()
 @property (nonatomic, strong) Level *level;
@@ -53,6 +54,17 @@
     
     // Load tiles
     [self.scene addTiles];
+    
+    id block = ^(Swap *swap) {
+        self.view.userInteractionEnabled = NO;
+        
+        [self.level performSwap:swap];
+        [self.scene animateSwap:swap completion:^{
+            self.view.userInteractionEnabled = YES;
+        }];
+    };
+    
+    self.scene.swipeHandler = block;
     
     // Present scene
     [skView presentScene:self.scene];
