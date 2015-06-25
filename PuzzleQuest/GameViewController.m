@@ -64,7 +64,9 @@
                 self.view.userInteractionEnabled = YES;
             }];
         } else {
-            self.view.userInteractionEnabled = YES;
+            [self.scene animateInvalidSwap:swap completion:^{
+                self.view.userInteractionEnabled = YES;
+            }];
         }
     };
     

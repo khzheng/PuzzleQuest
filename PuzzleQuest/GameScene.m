@@ -210,6 +210,22 @@ static const CGFloat TileHeight = 36.0;
     [swap.cookieB.sprite runAction:moveB];
 }
 
+- (void)animateInvalidSwap:(Swap *)swap completion:(dispatch_block_t)completion {
+    swap.cookieA.sprite.zPosition = 100;
+    swap.cookieB.sprite.zPosition = 90;
+    
+    const NSTimeInterval duration = 0.3;
+    
+    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:duration];
+    moveA.timingMode = SKActionTimingEaseOut;
+    
+    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:duration];
+    moveB.timingMode = SKActionTimingEaseOut;
+    
+    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, moveB, [SKAction runBlock:completion]]]];
+    [swap.cookieB.sprite runAction:[SKAction sequence:@[moveB, moveA]]];
+}
+
 - (void)showSelectionIndicatorForCookie:(Cookie *)cookie {
     // if selection indicator is visible, remove it
     if (self.selectionSprite.parent != nil)
