@@ -72,7 +72,17 @@
     for (NSInteger row = 0; row < NumRows; row++) {
         for (NSInteger column = 0; column < NumColumns; column++) {
             if (_tiles[column][row] != nil) {   // make sure a tile is there
-                NSUInteger cookieType = arc4random_uniform(NumberCookieTypes) + 1;  // + 1 b/c we want 1-6
+                // ensures that there are no initial matches
+                NSInteger cookieType;
+                do {
+                    cookieType = arc4random_uniform(NumberCookieTypes) + 1;
+                } while((column >= 2 &&
+                         _cookies[column - 1][row].cookieType == cookieType &&
+                         _cookies[column - 2][row].cookieType == cookieType)
+                        ||
+                        (row >= 2 &&
+                         _cookies[column][row - 1].cookieType == cookieType &&
+                         _cookies[column][row - 2].cookieType == cookieType));
                 
                 Cookie *cookie = [[Cookie alloc] init];
                 cookie.cookieType = cookieType;
