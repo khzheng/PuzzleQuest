@@ -21,5 +21,6 @@ static const NSInteger NumRows = 9;
 - (Cookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
 - (Tile *)tileAtColumn:(NSInteger)column row:(NSInteger)row;
 - (void)performSwap:(Swap *)swap;
+- (BOOL)isPossibleSwap:(Swap *)swap;
 
 @end

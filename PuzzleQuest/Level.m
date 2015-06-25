@@ -155,6 +155,7 @@
                             Swap *swap = [[Swap alloc] init];
                             swap.cookieA = cookie;
                             swap.cookieB = otherCookie;
+                            [set addObject:swap];
                         }
                         
                         // swap them back
@@ -182,6 +183,10 @@
     for (NSInteger i = row - 1; i >= 0 && _cookies[column][i].cookieType == cookieType; i--, verticalLength++);
     for (NSInteger i = row + 1; i < NumRows && _cookies[column][i].cookieType == cookieType; i++, verticalLength++);
     return (verticalLength >= 3);
+}
+
+- (BOOL)isPossibleSwap:(Swap *)swap {
+    return [self.possibleSwaps containsObject:swap];
 }
 
 @end

@@ -57,11 +57,15 @@
     
     id block = ^(Swap *swap) {
         self.view.userInteractionEnabled = NO;
-        
-        [self.level performSwap:swap];
-        [self.scene animateSwap:swap completion:^{
+
+        if ([self.level isPossibleSwap:swap]) {
+            [self.level performSwap:swap];
+            [self.scene animateSwap:swap completion:^{
+                self.view.userInteractionEnabled = YES;
+            }];
+        } else {
             self.view.userInteractionEnabled = YES;
-        }];
+        }
     };
     
     self.scene.swipeHandler = block;
