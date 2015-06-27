@@ -224,8 +224,10 @@
     NSSet *horizontalMatches = [self detectHorizontalMatches];
     NSSet *verticalMatches = [self detectVerticalMatches];
     
-    NSLog(@"Horizontal matches: %@", horizontalMatches);
-    NSLog(@"Vertical matches: %@", verticalMatches);
+    [self removeCookies:horizontalMatches];
+    [self removeCookies:verticalMatches];
+//    NSLog(@"Horizontal matches: %@", horizontalMatches);
+//    NSLog(@"Vertical matches: %@", verticalMatches);
     
     return [horizontalMatches setByAddingObjectsFromSet:verticalMatches];
 }
@@ -258,6 +260,12 @@
     }
     
     return set;
+}
+
+- (void)removeCookies:(NSSet *)chains {
+    for (Chain *chain in chains)
+        for (Cookie *cookie in chain.cookies)
+            _cookies[cookie.column][cookie.row] = nil;
 }
 
 @end

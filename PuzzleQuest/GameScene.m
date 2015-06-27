@@ -10,6 +10,7 @@
 #import "Level.h"
 #import "Cookie.h"
 #import "Swap.h"
+#import "Chain.h"
 
 static const CGFloat TileWidth = 32.0;
 static const CGFloat TileHeight = 36.0;
@@ -224,6 +225,26 @@ static const CGFloat TileHeight = 36.0;
     
     [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, moveB, [SKAction runBlock:completion]]]];
     [swap.cookieB.sprite runAction:[SKAction sequence:@[moveB, moveA]]];
+}
+
+- (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion {
+    for (Chain *chain in chains) {
+        for (Cookie *cookie in chain.cookies) {
+            if (cookie.sprite != nil) { // same cookie can be part of two chains, but we only want to add one animation to the sprite
+                SKAction *scaleAction = [SKAction scaleTo:0.1 duration:0.3];
+                scaleAction.timingMode = SKActionTimingEaseOut;
+                [cookie.sprite runAction:[SKAction sequence:@[scaleAction, [SKAction removeFromParent]]]];
+                
+                cookie.sprite = nil;    // this is for the comment in the above if
+            }
+        }
+    }
+    
+    // play maych sound
+    
+    // wait for animation to complete before continuing
+    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:0.3],
+                                         [SKAction runBlock:completion]]]];
 }
 
 - (void)showSelectionIndicatorForCookie:(Cookie *)cookie {
