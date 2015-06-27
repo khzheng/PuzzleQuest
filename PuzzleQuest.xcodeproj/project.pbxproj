@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = EB021BF81B3CD8F9005ADF09 /* Chain.m */; };
 		EBFF547F1B390B59006972D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF547E1B390B59006972D7 /* main.m */; };
 		EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54811B390B59006972D7 /* AppDelegate.m */; };
 		EBFF54851B390B59006972D7 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54841B390B59006972D7 /* GameScene.m */; };
@@ -34,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EB021BF71B3CD8F9005ADF09 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chain.h; sourceTree = "<group>"; };
+		EB021BF81B3CD8F9005ADF09 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chain.m; sourceTree = "<group>"; };
 		EBFF54791B390B59006972D7 /* PuzzleQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFF547D1B390B59006972D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFF547E1B390B59006972D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 				EBFF54B41B391928006972D7 /* Tile.m */,
 				EBFF54B61B3A4869006972D7 /* Swap.h */,
 				EBFF54B71B3A4869006972D7 /* Swap.m */,
+				EB021BF71B3CD8F9005ADF09 /* Chain.h */,
+				EB021BF81B3CD8F9005ADF09 /* Chain.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				EBFF54851B390B59006972D7 /* GameScene.m in Sources */,
 				EBFF54B81B3A4869006972D7 /* Swap.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
+				EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */,
 				EBFF54B51B391928006972D7 /* Tile.m in Sources */,
 				EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */,
 			);
