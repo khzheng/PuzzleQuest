@@ -276,6 +276,41 @@ static const CGFloat TileHeight = 36.0;
                                          [SKAction runBlock:completion]]]];
 }
 
+- (void)animateNewCookies:(NSArray *)columns completion:(dispatch_block_t)completion {
+    // need to compute animation duration
+    __block NSTimeInterval longestDuration = 0;
+    
+    for (NSArray *array in columns) {
+        NSInteger startRow = ((Cookie *)[array firstObject]).row + 1;
+        
+        [array enumerateObjectsUsingBlock:^(Cookie *cookie, NSUInteger idx, BOOL *stop) {
+            // create new cookie sprite
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:[cookie spriteName]];
+            sprite.position = [self pointForColumn:cookie.column row:startRow];
+            [self.cookiesLayer addChild:sprite];
+            cookie.sprite = sprite;
+            
+            // the higher teh cookie, the longer the delay, so make the cookies appear to fall after one another
+            NSTimeInterval delay = 0.1 + 0.2 * ([array count] - idx - 1);
+            
+            NSTimeInterval duration = (startRow - cookie.row) * 0.1;
+            longestDuration = MAX(longestDuration, duration + delay);
+            
+            //  animate sprite failling down and fading in
+            CGPoint newPosition = [self pointForColumn:cookie.column row:cookie.row];
+            SKAction *moveAction = [SKAction moveTo:newPosition duration:duration];
+            moveAction.timingMode = SKActionTimingEaseOut;
+            cookie.sprite.alpha = 0;
+            [cookie.sprite runAction:[SKAction sequence:@[[SKAction waitForDuration:delay],
+                                                          [SKAction group:@[[SKAction fadeInWithDuration:0.05], moveAction]]]]];
+        }];
+    }
+    
+    // wait until all animations before continuing
+    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:longestDuration],
+                                         [SKAction runBlock:completion]]]];
+}
+
 - (void)showSelectionIndicatorForCookie:(Cookie *)cookie {
     // if selection indicator is visible, remove it
     if (self.selectionSprite.parent != nil)

@@ -102,18 +102,23 @@
                          _cookies[column][row - 1].cookieType == cookieType &&
                          _cookies[column][row - 2].cookieType == cookieType));
                 
-                Cookie *cookie = [[Cookie alloc] init];
-                cookie.cookieType = cookieType;
-                cookie.row = row;
-                cookie.column = column;
+                Cookie *cookie = [self createCookitAtColumn:column row:row withType:cookieType];
                 
-                _cookies[column][row] = cookie;
                 [set addObject:cookie];
             }
         }
     }
     
     return set;
+}
+
+- (Cookie *)createCookitAtColumn:(NSInteger)column row:(NSInteger)row withType:(NSUInteger)cookieType {
+    Cookie *cookie = [[Cookie alloc] init];
+    cookie.cookieType = cookieType;
+    cookie.row = row;
+    cookie.column = column;
+    _cookies[column][row] = cookie;
+    return cookie;
 }
 
 // this steps thru the grid and swap each cookie with the one next to it, once horizontally and then vertically
@@ -267,6 +272,38 @@
                         break;
                     }
                 }
+            }
+        }
+    }
+    
+    return columns;
+}
+
+- (NSArray *)topUpCookies {
+    NSMutableArray *columns = [NSMutableArray array];
+    
+    NSUInteger cookieType = 0;
+    
+    for (NSInteger column = 0; column < NumColumns; column++) {
+        NSMutableArray *array;
+        for (NSInteger row = NumRows - 1; row > 0 && _cookies[column][row] == nil; row--) {
+            // make sure tile is there
+            if (_tiles[column][row] != nil) {
+                
+                // create new cookie type, try to mix it up
+                NSUInteger newCookieType;
+                do {
+                    newCookieType = arc4random_uniform(NumberCookieTypes) + 1;
+                } while (newCookieType == cookieType);
+                cookieType = newCookieType;
+                
+                Cookie *cookie = [self createCookitAtColumn:column row:row withType:cookieType];
+                
+                if (array == nil) {
+                    array = [NSMutableArray array];
+                    [columns addObject:array];
+                }
+                [array addObject:cookie];
             }
         }
     }
