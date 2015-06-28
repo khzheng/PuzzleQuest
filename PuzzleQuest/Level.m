@@ -43,6 +43,10 @@
         NSLog(@"possible swaps: %@", self.possibleSwaps);
     } while ([self.possibleSwaps count] == 0);
     
+    for (NSInteger column = 0; column < NumColumns; column++) {
+        NSLog(@"cookie(%lu, 0) type: %lu, exists? %d", column, _cookies[column][0].cookieType, _cookies[column][0] != nil);
+    }
+    
     return set;
 }
 
@@ -224,12 +228,50 @@
     NSSet *horizontalMatches = [self detectHorizontalMatches];
     NSSet *verticalMatches = [self detectVerticalMatches];
     
+    
     [self removeCookies:horizontalMatches];
     [self removeCookies:verticalMatches];
 //    NSLog(@"Horizontal matches: %@", horizontalMatches);
 //    NSLog(@"Vertical matches: %@", verticalMatches);
     
     return [horizontalMatches setByAddingObjectsFromSet:verticalMatches];
+}
+
+- (NSArray *)fillHoles {
+    NSMutableArray *columns = [NSMutableArray array];
+    
+    // loop thru each col and each row
+    for (NSInteger column = 0; column < NumColumns; column++) {
+        NSMutableArray *array;
+        for (NSInteger row = 0; row < NumRows; row++) {
+            // until we find an empty tile
+            if (_tiles[column][row] != nil && _cookies[column][row] == nil) {
+                // loop thru above rows until we find a cookie
+                for (NSInteger lookup = row + 1; lookup < NumRows; lookup++) {
+                    Cookie *cookie = _cookies[column][lookup];
+                    
+                    if (cookie != nil) {
+                        // move the cookie down
+                        _cookies[column][row] = cookie;
+                        _cookies[column][lookup] = nil;
+                        cookie.row = row;
+                        
+                        // each column gets its own array and cookies that are lower on the screen are first in
+                        // we keep this order intact so animation code can apply the correct delay
+                        if (array == nil) {
+                            array = [NSMutableArray array];
+                            [columns addObject:array];
+                        }
+                        [array addObject:cookie];
+                        
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    return columns;
 }
 
 - (NSSet *)detectVerticalMatches {

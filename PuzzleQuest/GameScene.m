@@ -247,6 +247,35 @@ static const CGFloat TileHeight = 36.0;
                                          [SKAction runBlock:completion]]]];
 }
 
+- (void)animateFallingCookies:(NSArray *)columns completion:(dispatch_block_t)completion {
+    // b/c the number of falling cookies varies, we have to compute the duration
+    __block NSTimeInterval longestDuration = 0;
+    
+    for (NSArray *array in columns) {
+        [array enumerateObjectsUsingBlock:^(Cookie *cookie, NSUInteger idx, BOOL *stop) {
+            CGPoint newPosition = [self pointForColumn:cookie.column row:cookie.row];
+            
+            // the higher up the cookie, the bigger the delay on animation
+            // this works out because fillHoles guarantees that lower cookies are first in
+            NSTimeInterval delay = 0.05 + 0.15 * idx;
+            
+            // duration of animation is based on how far the cookie has to fall (0.1 sec/tile)
+            NSTimeInterval duration = ((cookie.sprite.position.y - newPosition.y) / TileHeight) * 0.1;
+            
+            longestDuration = MAX(longestDuration, duration + delay);
+            
+            // perform animation
+            SKAction *moveAction = [SKAction moveTo:newPosition duration:duration];
+            moveAction.timingMode = SKActionTimingEaseOut;
+            [cookie.sprite runAction:[SKAction sequence:@[[SKAction waitForDuration:delay], moveAction]]];
+        }];
+    }
+    
+    // wait until all cookies have fallen before continueing game
+    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:longestDuration],
+                                         [SKAction runBlock:completion]]]];
+}
+
 - (void)showSelectionIndicatorForCookie:(Cookie *)cookie {
     // if selection indicator is visible, remove it
     if (self.selectionSprite.parent != nil)
