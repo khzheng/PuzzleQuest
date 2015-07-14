@@ -291,7 +291,7 @@ static const CGFloat TileHeight = 36.0;
             cookie.sprite = sprite;
             
             // the higher teh cookie, the longer the delay, so make the cookies appear to fall after one another
-            NSTimeInterval delay = 0.1 + 0.2 * ([array count] - idx - 1);
+            NSTimeInterval delay = 0.05 * ([array count] - idx - 1);
             
             NSTimeInterval duration = (startRow - cookie.row) * 0.1;
             longestDuration = MAX(longestDuration, duration + delay);
