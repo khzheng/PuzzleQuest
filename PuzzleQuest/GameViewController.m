@@ -123,6 +123,8 @@
 }
 
 - (void)shuffle {
+    [self.scene removeAllCookieSprites];
+    
     NSSet *newCookies = [self.level shuffle];
     [self.scene addSpritesForCookies:newCookies];
 }
@@ -150,6 +152,10 @@
 - (void)beginNextTurn {
     [self.level detectPossibleSwaps];
     self.view.userInteractionEnabled = YES;
+}
+
+- (IBAction)shuffleButtonPressed:(id)sender {
+    [self shuffle];
 }
 
 @end
