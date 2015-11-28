@@ -18,8 +18,10 @@ static const NSUInteger NumberCookieTypes = 6;
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) NSUInteger cookieType;
 @property (strong, nonatomic) SKSpriteNode *sprite;
+@property (assign, nonatomic) BOOL isSpecial;
 
 - (NSString *)spriteName;
 - (NSString *)highlightedSpriteName;
+- (NSString *)specialSpriteName;
 
 @end

@@ -24,6 +24,8 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _movedCookies = [[NSMutableSet alloc] init];
+        
         // create tiles
         for (NSInteger row = 0; row < NumRows; row++)
             for (NSInteger column = 0; column < NumColumns; column++)
@@ -44,7 +46,7 @@
     } while ([self.possibleSwaps count] == 0);
     
     for (NSInteger column = 0; column < NumColumns; column++) {
-        NSLog(@"cookie(%lu, 0) type: %lu, exists? %d", column, _cookies[column][0].cookieType, _cookies[column][0] != nil);
+        NSLog(@"cookie(%lu, 0) type: %lu, exists? %d", (long)column, (unsigned long)_cookies[column][0].cookieType, _cookies[column][0] != nil);
     }
     
     return set;
@@ -80,6 +82,11 @@
     _cookies[columnB][rowB] = swap.cookieA;
     swap.cookieA.column = columnB;
     swap.cookieA.row = rowB;
+    
+    [self.movedCookies addObject:swap.cookieA];
+    [self.movedCookies addObject:swap.cookieB];
+    
+    NSLog(@"movedCookies: %@", self.movedCookies);
 }
 
 #pragma mark - Helper methods
@@ -117,6 +124,7 @@
     cookie.cookieType = cookieType;
     cookie.row = row;
     cookie.column = column;
+    cookie.isSpecial = NO;
     _cookies[column][row] = cookie;
     return cookie;
 }
@@ -212,10 +220,29 @@
                     Chain *chain = [[Chain alloc] init];
                     chain.chainType = ChainTypeHorizontal;
                     do {
+                        _cookies[column][row].isSpecial = NO;
                         [chain addCookie:_cookies[column][row]];
                         column++;
                     }
                     while (column < NumColumns && _cookies[column][row].cookieType == matchType);
+                    
+                    if ([chain.cookies count] > 3) {
+                        // look for special cookies
+                        for (Cookie *cookie in chain.cookies) {
+                            if ([self.movedCookies containsObject:cookie]) {
+                                cookie.isSpecial = YES;
+                                
+                                // add special sprite
+                                SKTexture *texture = [SKTexture textureWithImageNamed:[cookie specialSpriteName]];
+                                SKSpriteNode *specialSprite = [SKSpriteNode node];
+                                specialSprite.size = texture.size;
+                                [specialSprite runAction:[SKAction setTexture:texture]];
+                                
+                                [cookie.sprite addChild:specialSprite];
+                                specialSprite.alpha = 1.0;
+                            }
+                        }
+                    }
                     
                     [set addObject:chain];
                     continue;
@@ -223,6 +250,55 @@
             }
             
             column += 1;
+        }
+    }
+    
+    return set;
+}
+
+- (NSSet *)detectVerticalMatches {
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (NSInteger column = 0; column < NumColumns; column++) {
+        for (NSInteger row = 0; row < NumRows - 2; ) {
+            if (_cookies[column][row] != nil) {
+                NSUInteger matchType = _cookies[column][row].cookieType;
+                if (_cookies[column][row + 1].cookieType == matchType &&
+                    _cookies[column][row + 2].cookieType == matchType) {
+                    
+                    Chain *chain = [[Chain alloc] init];
+                    chain.chainType = ChainTypeVertical;
+                    do {
+                        _cookies[column][row].isSpecial = NO;
+                        [chain addCookie:_cookies[column][row]];
+                        row++;
+                    }
+                    while (row < NumRows && _cookies[column][row].cookieType == matchType);
+                    
+                    if ([chain.cookies count] > 3) {
+                        // look for special cookies
+                        for (Cookie *cookie in chain.cookies) {
+                            if ([self.movedCookies containsObject:cookie]) {
+                                cookie.isSpecial = YES;
+                                
+                                // add special sprite
+                                SKTexture *texture = [SKTexture textureWithImageNamed:[cookie specialSpriteName]];
+                                SKSpriteNode *specialSprite = [SKSpriteNode node];
+                                specialSprite.size = texture.size;
+                                [specialSprite runAction:[SKAction setTexture:texture]];
+                                
+                                [cookie.sprite addChild:specialSprite];
+                                specialSprite.alpha = 1.0;
+                            }
+                        }
+                    }
+                    
+                    [set addObject:chain];
+                    continue;
+                }
+            }
+            
+            row += 1;
         }
     }
     
@@ -311,40 +387,11 @@
     return columns;
 }
 
-- (NSSet *)detectVerticalMatches {
-    NSMutableSet *set = [NSMutableSet set];
-    
-    for (NSInteger column = 0; column < NumColumns; column++) {
-        for (NSInteger row = 0; row < NumRows - 2; ) {
-            if (_cookies[column][row] != nil) {
-                NSUInteger matchType = _cookies[column][row].cookieType;
-                if (_cookies[column][row + 1].cookieType == matchType &&
-                    _cookies[column][row + 2].cookieType == matchType) {
-                    
-                    Chain *chain = [[Chain alloc] init];
-                    chain.chainType = ChainTypeVertical;
-                    do {
-                        [chain addCookie:_cookies[column][row]];
-                        row++;
-                    }
-                    while (row < NumRows && _cookies[column][row].cookieType == matchType);
-                    
-                    [set addObject:chain];
-                    continue;
-                }
-            }
-            
-            row += 1;
-        }
-    }
-    
-    return set;
-}
-
 - (void)removeCookies:(NSSet *)chains {
     for (Chain *chain in chains)
         for (Cookie *cookie in chain.cookies)
-            _cookies[cookie.column][cookie.row] = nil;
+            if (!cookie.isSpecial)
+                _cookies[cookie.column][cookie.row] = nil;
 }
 
 @end

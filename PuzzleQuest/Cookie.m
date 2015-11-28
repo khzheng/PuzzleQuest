@@ -36,6 +36,19 @@
     return highlightedSpriteNames[self.cookieType - 1];
 }
 
+- (NSString *)specialSpriteName {
+    static NSString * const specialSpriteNames[] = {
+        @"Croissant-special",
+        @"Cupcake-special",
+        @"Danish-special",
+        @"Donut-special",
+        @"Macaroon-special",
+        @"SugarCookie-special",
+    };
+    
+    return specialSpriteNames[self.cookieType - 1];
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"type:%ld square:(%ld,%ld)", (long)self.cookieType,
             (long)self.column, (long)self.row];

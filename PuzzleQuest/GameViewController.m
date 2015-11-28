@@ -131,6 +131,7 @@
     NSSet *chains = [self.level removeMatches];
     
     if ([chains count] == 0) {
+        [self.level.movedCookies removeAllObjects];
         [self beginNextTurn];
         return;
     }

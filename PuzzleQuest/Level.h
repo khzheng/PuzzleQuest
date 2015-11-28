@@ -18,6 +18,8 @@ static const NSInteger NumRows = 9;
 
 @interface Level : NSObject
 
+@property (nonatomic, strong) NSMutableSet *movedCookies;
+
 - (NSSet *)shuffle;
 - (Cookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
 - (Tile *)tileAtColumn:(NSInteger)column row:(NSInteger)row;
