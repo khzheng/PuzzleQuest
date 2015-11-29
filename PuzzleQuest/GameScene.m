@@ -240,7 +240,7 @@ static const CGFloat TileHeight = 36.0;
 - (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion {
     for (Chain *chain in chains) {
         for (Cookie *cookie in chain.cookies) {
-            if (cookie.sprite != nil) { // same cookie can be part of two chains, but we only want to add one animation to the sprite
+            if (cookie.sprite != nil && !cookie.isSpecial) { // same cookie can be part of two chains, but we only want to add one animation to the sprite
                 SKAction *scaleAction = [SKAction scaleTo:0.1 duration:0.3];
                 scaleAction.timingMode = SKActionTimingEaseOut;
                 [cookie.sprite runAction:[SKAction sequence:@[scaleAction, [SKAction removeFromParent]]]];
