@@ -20,6 +20,8 @@ static const NSUInteger NumberCookieTypes = 6;
 @property (strong, nonatomic) SKSpriteNode *sprite;
 @property (assign, nonatomic) BOOL isSpecial;
 
+- (BOOL)isEqualToCookie:(Cookie *)cookie;
+
 - (NSString *)spriteName;
 - (NSString *)highlightedSpriteName;
 - (NSString *)specialSpriteName;

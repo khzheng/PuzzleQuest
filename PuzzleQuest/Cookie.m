@@ -10,6 +10,28 @@
 
 @implementation Cookie
 
+- (BOOL)isEqual:(id)object {
+    if (self == object)
+        return YES;
+    
+    if (![object isKindOfClass:[Cookie class]])
+        return NO;
+    
+    return [self isEqualToCookie:(Cookie *)object];
+}
+
+- (BOOL)isEqualToCookie:(Cookie *)cookie {
+    if (!cookie)
+        return NO;
+    
+    BOOL haveEqualColumns = self.column == cookie.column;
+    BOOL haveEqualRows = self.row == cookie.row;
+    BOOL haveEqualCookieTypes = self.cookieType == cookie.cookieType;
+    BOOL haveEqualIsSpecial = self.isSpecial == cookie.isSpecial;
+    
+    return haveEqualColumns && haveEqualRows && haveEqualCookieTypes && haveEqualIsSpecial;
+}
+
 - (NSString *)spriteName {
     static NSString * const spriteNames[] = {
         @"Croissant",
