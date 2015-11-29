@@ -226,7 +226,7 @@
                     }
                     while (column < NumColumns && _cookies[column][row].cookieType == matchType);
                     
-                    if ([chain.cookies count] > 3) {
+                    if ([chain count] == 4) {
                         // look for special cookies
                         for (Cookie *cookie in chain.cookies) {
                             if ([self.movedCookies containsObject:cookie]) {
@@ -242,6 +242,19 @@
                                 specialSprite.alpha = 1.0;
                             }
                         }
+                    } else if ([chain count] >= 5) {
+                        // middle cookie becomes special
+                        Cookie *specialCookie = chain.cookies[2];
+                        specialCookie.isSpecial = YES;
+                        
+                        // add special sprite
+                        SKTexture *texture = [SKTexture textureWithImageNamed:[specialCookie specialSpriteName]];
+                        SKSpriteNode *specialSprite = [SKSpriteNode node];
+                        specialSprite.size = texture.size;
+                        [specialSprite runAction:[SKAction setTexture:texture]];
+                        
+                        [specialCookie.sprite addChild:specialSprite];
+                        specialSprite.alpha = 1.0;
                     }
                     
                     [set addObject:chain];
@@ -275,7 +288,7 @@
                     }
                     while (row < NumRows && _cookies[column][row].cookieType == matchType);
                     
-                    if ([chain.cookies count] > 3) {
+                    if ([chain count] == 4) {
                         // look for special cookies
                         for (Cookie *cookie in chain.cookies) {
                             if ([self.movedCookies containsObject:cookie]) {
@@ -291,6 +304,19 @@
                                 specialSprite.alpha = 1.0;
                             }
                         }
+                    } else if ([chain count] >= 5) {
+                        // middle cookie becomes special
+                        Cookie *specialCookie = chain.cookies[2];
+                        specialCookie.isSpecial = YES;
+                        
+                        // add special sprite
+                        SKTexture *texture = [SKTexture textureWithImageNamed:[specialCookie specialSpriteName]];
+                        SKSpriteNode *specialSprite = [SKSpriteNode node];
+                        specialSprite.size = texture.size;
+                        [specialSprite runAction:[SKAction setTexture:texture]];
+                        
+                        [specialCookie.sprite addChild:specialSprite];
+                        specialSprite.alpha = 1.0;
                     }
                     
                     [set addObject:chain];

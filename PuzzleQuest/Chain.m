@@ -18,6 +18,10 @@
     [_cookies addObject:cookie];
 }
 
+- (NSUInteger)count {
+    return [_cookies count];
+}
+
 - (NSArray *)cookies {
     return _cookies;
 }

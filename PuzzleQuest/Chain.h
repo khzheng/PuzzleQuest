@@ -21,5 +21,6 @@ typedef NS_ENUM(NSUInteger, ChainType) {
 @property (nonatomic, assign) ChainType chainType;
 
 - (void)addCookie:(Cookie *)cookie;
+- (NSUInteger)count;
 
 @end
