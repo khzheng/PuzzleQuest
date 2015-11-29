@@ -13,6 +13,9 @@
 typedef NS_ENUM(NSUInteger, ChainType) {
     ChainTypeHorizontal,
     ChainTypeVertical,
+    ChainTypeL,
+    ChainTypeT,
+    ChainTypeCross,
 };
 
 @interface Chain : NSObject
@@ -22,5 +25,8 @@ typedef NS_ENUM(NSUInteger, ChainType) {
 
 - (void)addCookie:(Cookie *)cookie;
 - (NSUInteger)count;
+- (BOOL)intersectsChain:(Chain *)chain;
+- (Cookie *)intersectingCookie:(Chain *)chain;
+- (BOOL)containsCookie:(Cookie *)cookie;
 
 @end

@@ -10,6 +10,22 @@
 
 @implementation Cookie
 
+- (void)setIsSpecial:(BOOL)isSpecial {
+    if (_isSpecial == isSpecial)
+        return;
+    
+    _isSpecial = isSpecial;
+    
+    if (_isSpecial) {
+        SKTexture *texture = [SKTexture textureWithImageNamed:[self specialSpriteName]];
+        SKSpriteNode *specialSprite = [SKSpriteNode node];
+        specialSprite.size = texture.size;
+        [specialSprite runAction:[SKAction setTexture:texture]];
+        [self.sprite addChild:specialSprite];
+        specialSprite.alpha = 1.0;
+    }
+}
+
 - (BOOL)isEqual:(id)object {
     if (self == object)
         return YES;

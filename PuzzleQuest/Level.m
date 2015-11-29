@@ -293,30 +293,12 @@
                         for (Cookie *cookie in chain.cookies) {
                             if ([self.movedCookies containsObject:cookie]) {
                                 cookie.isSpecial = YES;
-                                
-                                // add special sprite
-                                SKTexture *texture = [SKTexture textureWithImageNamed:[cookie specialSpriteName]];
-                                SKSpriteNode *specialSprite = [SKSpriteNode node];
-                                specialSprite.size = texture.size;
-                                [specialSprite runAction:[SKAction setTexture:texture]];
-                                
-                                [cookie.sprite addChild:specialSprite];
-                                specialSprite.alpha = 1.0;
                             }
                         }
                     } else if ([chain count] >= 5) {
                         // middle cookie becomes special
                         Cookie *specialCookie = chain.cookies[2];
                         specialCookie.isSpecial = YES;
-                        
-                        // add special sprite
-                        SKTexture *texture = [SKTexture textureWithImageNamed:[specialCookie specialSpriteName]];
-                        SKSpriteNode *specialSprite = [SKSpriteNode node];
-                        specialSprite.size = texture.size;
-                        [specialSprite runAction:[SKAction setTexture:texture]];
-                        
-                        [specialCookie.sprite addChild:specialSprite];
-                        specialSprite.alpha = 1.0;
                     }
                     
                     [set addObject:chain];
@@ -335,13 +317,76 @@
     NSSet *horizontalMatches = [self detectHorizontalMatches];
     NSSet *verticalMatches = [self detectVerticalMatches];
     
+    // any two chains that share a cookie should be a merged chain (either L, T, or + chain)
+    // find intersecting chains
+    NSMutableArray *intersectingChains = [NSMutableArray array];
+    NSArray *cartesianProductOfChains = [self cartesianProductOfArrays:@[[horizontalMatches allObjects], [verticalMatches allObjects]]];
+    for (NSArray *chains in cartesianProductOfChains) {
+        if ([chains count] == 2) {
+            Chain *chain1 = chains[0];
+            Chain *chain2 = chains[1];
+            if ([chain1 intersectsChain:chain2])
+                [intersectingChains addObject:chains];
+        }
+    }
     
-    [self removeCookies:horizontalMatches];
-    [self removeCookies:verticalMatches];
-//    NSLog(@"Horizontal matches: %@", horizontalMatches);
-//    NSLog(@"Vertical matches: %@", verticalMatches);
+    NSMutableSet *chainsToRemove = [NSMutableSet set];
+    NSMutableSet *mergedChains = [NSMutableSet set];
+    // next, merge intersecting chains, add old chains to remove, and add newly merged chain
+    for (NSArray *intersectingChain in intersectingChains) {
+        if ([intersectingChain count] == 2) {
+            // merge chain
+            Chain *chain1 = intersectingChain[0];
+            Chain *chain2 = intersectingChain[1];
+            Cookie *intersectingCookie = [chain1 intersectingCookie:chain2];
+            // TODO: find the chain type
+            NSSet *allCookies = [NSSet setWithArray:[chain1.cookies arrayByAddingObjectsFromArray:chain2.cookies]];
+            Chain *mergedChain = [[Chain alloc] init];
+            [allCookies enumerateObjectsUsingBlock:^(Cookie *cookie, BOOL *stop) {
+                if (intersectingCookie && [cookie isEqualToCookie:intersectingCookie])
+                    cookie.isSpecial = YES;
+                [mergedChain addCookie:cookie];
+            }];
+            
+            // add old chains to remove
+            [chainsToRemove addObjectsFromArray:@[chain1, chain2]];
+            
+            // add newly merged chain
+            [mergedChains addObject:mergedChain];
+        }
+    }
     
-    return [horizontalMatches setByAddingObjectsFromSet:verticalMatches];
+    NSMutableSet *allMatches = [NSMutableSet setWithSet:[horizontalMatches setByAddingObjectsFromSet:verticalMatches]];
+    
+    // now actually remove the old chains
+    [allMatches minusSet:chainsToRemove];
+    
+    // now actually add the merged chains
+    [allMatches unionSet:mergedChains];
+
+    [self removeCookies:[NSSet setWithSet:allMatches]];
+    
+    return [NSSet setWithSet:allMatches];
+}
+
+- (NSArray *)cartesianProductOfArrays:(NSArray *)arrays {
+    NSUInteger arraysCount = [arrays count];
+    unsigned long resultSize = 1;
+    for (NSArray *array in arrays)
+        resultSize *= array.count;
+    
+    NSMutableArray *product = [NSMutableArray arrayWithCapacity:resultSize];
+    for (unsigned long i = 0; i < resultSize; i++) {
+        NSMutableArray *cross = [NSMutableArray arrayWithCapacity:arraysCount];
+        [product addObject:cross];
+        unsigned long n = i;
+        for (NSArray *array in arrays) {
+            [cross addObject:[array objectAtIndex:n % array.count]];
+            n /= array.count;
+        }
+    }
+    
+    return product;
 }
 
 - (NSArray *)fillHoles {

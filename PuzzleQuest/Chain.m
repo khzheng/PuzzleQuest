@@ -22,6 +22,21 @@
     return [_cookies count];
 }
 
+- (BOOL)intersectsChain:(Chain *)chain {
+    return [self intersectingCookie:chain] == nil ? NO : YES;
+}
+
+- (Cookie *)intersectingCookie:(Chain *)chain {
+    NSMutableSet *intersectingCookies = [NSMutableSet setWithArray:self.cookies];
+    [intersectingCookies intersectSet:[NSSet setWithArray:chain.cookies]];
+    
+    return [intersectingCookies count] > 0 ? [intersectingCookies anyObject] : nil;
+}
+
+- (BOOL)containsCookie:(Cookie *)cookie {
+    return [self.cookies containsObject:cookie];
+}
+
 - (NSArray *)cookies {
     return _cookies;
 }
