@@ -228,11 +228,18 @@
                     
                     if ([chain count] == 4) {
                         // look for special cookies
+                        BOOL didFindSpecialCookie = NO;
                         for (Cookie *cookie in chain.cookies) {
                             if ([self.movedCookies containsObject:cookie]) {
                                 cookie.isSpecial = YES;
+                                didFindSpecialCookie = YES;
+                                break;
                             }
                         }
+                        
+                        // can't find it, just make first one special
+                        if (!didFindSpecialCookie)
+                            [chain.cookies[0] setIsSpecial:YES];
                     } else if ([chain count] >= 5) {
                         // middle cookie becomes special
                         Cookie *specialCookie = chain.cookies[2];
@@ -272,11 +279,18 @@
                     
                     if ([chain count] == 4) {
                         // look for special cookies
+                        BOOL didFindSpecialCookie = NO;
                         for (Cookie *cookie in chain.cookies) {
                             if ([self.movedCookies containsObject:cookie]) {
                                 cookie.isSpecial = YES;
+                                didFindSpecialCookie = YES;
+                                break;
                             }
                         }
+                        
+                        // can't find it, just make first one special
+                        if (!didFindSpecialCookie)
+                            [chain.cookies[0] setIsSpecial:YES];
                     } else if ([chain count] >= 5) {
                         // middle cookie becomes special
                         Cookie *specialCookie = chain.cookies[2];
