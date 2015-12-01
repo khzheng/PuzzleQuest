@@ -309,11 +309,34 @@
     return set;
 }
 
+- (ChainType)chainTypeForChain:(Chain *)chain intersectingChain:(Chain *)intersectingChain {
+    NSUInteger chain1CookieCount = [chain.cookies count];
+    NSUInteger chain2CookieCount = [intersectingChain.cookies count];
+    Cookie *intersectingCookie = [chain intersectingCookie:intersectingChain];
+    NSUInteger indexOfCookieInChain1 = [chain.cookies indexOfObject:intersectingCookie];
+    NSUInteger indexOfCookieInChain2 = [intersectingChain.cookies indexOfObject:intersectingCookie];
+    
+    if ((indexOfCookieInChain1 == 0 || indexOfCookieInChain1 == chain1CookieCount - 1) && (indexOfCookieInChain2 == 0 || indexOfCookieInChain2 == chain2CookieCount - 1)) {
+        // chain is L type if the intersecting cookie is at the start or end of both chains
+        return ChainTypeL;
+    } else if (((indexOfCookieInChain1 == 0 || indexOfCookieInChain1 == chain1CookieCount - 1) && (indexOfCookieInChain2 > 0 || indexOfCookieInChain2 < chain2CookieCount - 1)) ||
+               ((indexOfCookieInChain1 > 0 || indexOfCookieInChain1 < chain1CookieCount - 2) && (indexOfCookieInChain2 == 0 || indexOfCookieInChain2 == chain2CookieCount - 1))) {
+        // chain is T type if intersecting cookie is start or end of one chain and in the middle of another chain
+        return ChainTypeT;
+    } else if ((indexOfCookieInChain1 > 0 || indexOfCookieInChain1 < chain1CookieCount - 1) && (indexOfCookieInChain2 > 0 && indexOfCookieInChain2 < chain2CookieCount - 1)) {
+        // chain is cross type if intersecting cookie is in the middle of both chains
+        return ChainTypeCross;
+    } else {
+        // no idea
+        return ChainTypeUnknown;
+    }
+}
+
 - (NSSet *)removeMatches {
     NSSet *horizontalMatches = [self detectHorizontalMatches];
     NSSet *verticalMatches = [self detectVerticalMatches];
     
-    // any two chains that share a cookie should be a merged chain (either L, T, or + chain)
+    // any two chains that share a cookie should be a merged chain (either L, T, or cross chain)
     // find intersecting chains
     NSMutableArray *intersectingChains = [NSMutableArray array];
     NSArray *cartesianProductOfChains = [self cartesianProductOfArrays:@[[horizontalMatches allObjects], [verticalMatches allObjects]]];
@@ -335,9 +358,10 @@
             Chain *chain1 = intersectingChain[0];
             Chain *chain2 = intersectingChain[1];
             Cookie *intersectingCookie = [chain1 intersectingCookie:chain2];
-            // TODO: find the chain type
+            ChainType chainType = [self chainTypeForChain:chain1 intersectingChain:chain2];
             NSSet *allCookies = [NSSet setWithArray:[chain1.cookies arrayByAddingObjectsFromArray:chain2.cookies]];
             Chain *mergedChain = [[Chain alloc] init];
+            mergedChain.chainType = chainType;
             [allCookies enumerateObjectsUsingBlock:^(Cookie *cookie, BOOL *stop) {
                 if (intersectingCookie && [cookie isEqualToCookie:intersectingCookie])
                     cookie.isSpecial = YES;

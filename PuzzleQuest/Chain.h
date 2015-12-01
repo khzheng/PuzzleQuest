@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, ChainType) {
     ChainTypeL,
     ChainTypeT,
     ChainTypeCross,
+    ChainTypeUnknown,
 };
 
 @interface Chain : NSObject
