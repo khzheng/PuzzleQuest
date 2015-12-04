@@ -45,9 +45,9 @@
         NSLog(@"possible swaps: %@", self.possibleSwaps);
     } while ([self.possibleSwaps count] == 0);
     
-    for (NSInteger column = 0; column < NumColumns; column++) {
-        NSLog(@"cookie(%lu, 0) type: %lu, exists? %d", (long)column, (unsigned long)_cookies[column][0].cookieType, _cookies[column][0] != nil);
-    }
+//    for (NSInteger column = 0; column < NumColumns; column++) {
+//        NSLog(@"cookie(%lu, 0) type: %lu, exists? %d", (long)column, (unsigned long)_cookies[column][0].cookieType, _cookies[column][0] != nil);
+//    }
     
     return set;
 }
@@ -86,7 +86,7 @@
     [self.movedCookies addObject:swap.cookieA];
     [self.movedCookies addObject:swap.cookieB];
     
-    NSLog(@"movedCookies: %@", self.movedCookies);
+//    NSLog(@"movedCookies: %@", self.movedCookies);
 }
 
 #pragma mark - Helper methods
@@ -386,6 +386,8 @@
 
     [self removeCookies:[NSSet setWithSet:allMatches]];
     
+    [self calculateScores:allMatches];
+    
     return [NSSet setWithSet:allMatches];
 }
 
@@ -483,6 +485,11 @@
         for (Cookie *cookie in chain.cookies)
             if (!cookie.isSpecial)
                 _cookies[cookie.column][cookie.row] = nil;
+}
+
+- (void)calculateScores:(NSSet *)chains {
+    for (Chain *chain in chains)
+        chain.score = [chain.cookies count] - 2;
 }
 
 @end

@@ -193,7 +193,7 @@ static const CGFloat TileHeight = 36.0;
     
     // just log for now
     if (self.swipeHandler != nil) {
-        NSLog(@"*** swapping %@ with %@", fromCookie, toCookie);
+//        NSLog(@"*** swapping %@ with %@", fromCookie, toCookie);
         Swap *swap = [[Swap alloc] init];
         swap.cookieA = fromCookie;
         swap.cookieB = toCookie;

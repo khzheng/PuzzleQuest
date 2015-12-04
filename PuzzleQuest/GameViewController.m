@@ -10,10 +10,14 @@
 #import "Level.h"
 #import "GameScene.h"
 #import "Swap.h"
+#import "Chain.h"
 
 @interface GameViewController ()
 @property (nonatomic, strong) Level *level;
 @property (nonatomic, strong) GameScene *scene;
+@property (nonatomic, assign) NSUInteger score;
+
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 @end
 
 @implementation SKScene (Unarchive)
@@ -97,6 +101,10 @@
 //    [skView presentScene:scene];
 }
 
+- (void)updateLabels {
+    self.scoreLabel.text = [NSString stringWithFormat:@"%lu", (long) self.score];
+}
+
 - (BOOL)shouldAutorotate {
     return YES;
 }
@@ -119,6 +127,9 @@
 }
 
 - (void)beginGame {
+    self.score = 0;
+    [self updateLabels];
+    
     [self shuffle];
 }
 
@@ -139,6 +150,12 @@
     }
     
     [self.scene animateMatchedCookies:chains completion:^{
+        for (Chain *chain in chains) {
+            self.score += chain.score;
+        }
+        
+        [self updateLabels];
+        
         NSArray *columns = [self.level fillHoles];
         [self.scene animateFallingCookies:columns completion:^{
             NSArray *columns = [self.level topUpCookies];

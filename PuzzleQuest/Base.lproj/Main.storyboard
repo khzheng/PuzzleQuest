@@ -24,16 +24,42 @@
                                     <action selector="shuffleButtonPressed:" destination="LVB-YS-i5n" eventType="touchUpInside" id="0XL-as-JsB"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-P8-MzC">
+                                <rect key="frame" x="272" y="28" width="57" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="57" id="ZER-9o-MnZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99999999999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Win-BA-qI2">
+                                <rect key="frame" x="238" y="57" width="125" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="Pg9-Ku-0uJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Win-BA-qI2" firstAttribute="top" secondItem="eXI-P8-MzC" secondAttribute="bottom" constant="8" symbolic="YES" id="MA9-d0-Sx9"/>
+                            <constraint firstItem="eXI-P8-MzC" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="8" symbolic="YES" id="VFT-Yx-bxX"/>
+                            <constraint firstItem="Win-BA-qI2" firstAttribute="centerX" secondItem="K5Q-iE-2hd" secondAttribute="centerX" id="VgY-as-HHl"/>
                             <constraint firstItem="K5Q-iE-2hd" firstAttribute="centerX" secondItem="bdc-N1-crn" secondAttribute="centerX" id="YKG-Lv-3DO"/>
+                            <constraint firstItem="eXI-P8-MzC" firstAttribute="centerX" secondItem="Win-BA-qI2" secondAttribute="centerX" id="hGu-Qt-vYT"/>
                             <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="K5Q-iE-2hd" secondAttribute="bottom" constant="57" id="jxc-TR-Xk0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scoreLabel" destination="Win-BA-qI2" id="LCt-Jy-3hG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="147" y="143"/>
         </scene>
     </scenes>
 </document>
