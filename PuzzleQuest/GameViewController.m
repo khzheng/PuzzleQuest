@@ -16,8 +16,10 @@
 @property (nonatomic, strong) Level *level;
 @property (nonatomic, strong) GameScene *scene;
 @property (nonatomic, assign) NSUInteger score;
+@property (nonatomic, assign) NSUInteger moves;
 
 @property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, weak) IBOutlet UILabel *movesLabel;
 @end
 
 @implementation SKScene (Unarchive)
@@ -68,6 +70,9 @@
 //                self.view.userInteractionEnabled = YES;
                 [self handleMatches];
             }];
+            
+            self.moves += 1;
+            [self updateLabels];
         } else {
             [self.scene animateInvalidSwap:swap completion:^{
                 self.view.userInteractionEnabled = YES;
@@ -103,6 +108,7 @@
 
 - (void)updateLabels {
     self.scoreLabel.text = [NSString stringWithFormat:@"%lu", (long) self.score];
+    self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.moves];
 }
 
 - (BOOL)shouldAutorotate {
@@ -128,6 +134,7 @@
 
 - (void)beginGame {
     self.score = 0;
+    self.moves = 0;
     [self updateLabels];
     
     [self shuffle];
