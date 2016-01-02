@@ -24,7 +24,7 @@
                                     <action selector="shuffleButtonPressed:" destination="LVB-YS-i5n" eventType="touchUpInside" id="0XL-as-JsB"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-P8-MzC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HP:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXI-P8-MzC">
                                 <rect key="frame" x="195" y="28" width="57" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="57" id="iOg-z7-NlB"/>
@@ -57,12 +57,24 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAME OVER LABEL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJe-Rj-NLk">
+                                <rect key="frame" x="139" y="251" width="323" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="323" id="GLD-FF-d9A"/>
+                                    <constraint firstAttribute="height" constant="38" id="pK1-3i-Du3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="YJe-Rj-NLk" firstAttribute="top" secondItem="bdc-N1-crn" secondAttribute="top" constant="251" id="3r2-Iq-W7g"/>
                             <constraint firstItem="Iyq-Xs-OlE" firstAttribute="baseline" secondItem="Win-BA-qI2" secondAttribute="baseline" id="7fo-SB-0Im"/>
                             <constraint firstItem="Win-BA-qI2" firstAttribute="top" secondItem="eXI-P8-MzC" secondAttribute="bottom" constant="8" symbolic="YES" id="8rm-b8-n6H"/>
                             <constraint firstItem="eXI-P8-MzC" firstAttribute="centerX" secondItem="Win-BA-qI2" secondAttribute="centerX" id="BNf-dA-fsT"/>
+                            <constraint firstItem="YJe-Rj-NLk" firstAttribute="centerX" secondItem="K5Q-iE-2hd" secondAttribute="centerX" id="EJ1-8U-pUi"/>
                             <constraint firstItem="Iyq-Xs-OlE" firstAttribute="leading" secondItem="Win-BA-qI2" secondAttribute="trailing" constant="29" id="H2H-5J-DyD"/>
                             <constraint firstItem="eXI-P8-MzC" firstAttribute="baseline" secondItem="fzS-7H-hKe" secondAttribute="baseline" id="LIN-b1-JeC"/>
                             <constraint firstItem="eXI-P8-MzC" firstAttribute="top" secondItem="PCf-gQ-wO7" secondAttribute="bottom" constant="8" symbolic="YES" id="POu-C1-5B9"/>
@@ -74,8 +86,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gameOverLabel" destination="YJe-Rj-NLk" id="car-RN-5v0"/>
+                        <outlet property="heroHpLabel" destination="Win-BA-qI2" id="OsR-FT-n7O"/>
                         <outlet property="movesLabel" destination="Iyq-Xs-OlE" id="gkz-iN-CrL"/>
-                        <outlet property="scoreLabel" destination="Win-BA-qI2" id="LCt-Jy-3hG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>

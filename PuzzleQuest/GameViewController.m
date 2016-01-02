@@ -11,15 +11,20 @@
 #import "GameScene.h"
 #import "Swap.h"
 #import "Chain.h"
+#import "Hero.h"
 
 @interface GameViewController ()
+@property (nonatomic, strong) Hero *hero;
 @property (nonatomic, strong) Level *level;
 @property (nonatomic, strong) GameScene *scene;
 @property (nonatomic, assign) NSUInteger score;
 @property (nonatomic, assign) NSUInteger moves;
 
-@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, weak) IBOutlet UILabel *heroHpLabel;
 @property (nonatomic, weak) IBOutlet UILabel *movesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *gameOverLabel;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
 @implementation SKScene (Unarchive)
@@ -71,8 +76,6 @@
                 [self handleMatches];
             }];
             
-            self.moves += 1;
-            [self updateLabels];
         } else {
             [self.scene animateInvalidSwap:swap completion:^{
                 self.view.userInteractionEnabled = YES;
@@ -82,8 +85,12 @@
     
     self.scene.swipeHandler = block;
     
+    self.gameOverLabel.hidden = YES;
+    
     // Present scene
     [skView presentScene:self.scene];
+    
+    self.hero = [[Hero alloc] init];
     
     // start game!
     [self beginGame];
@@ -106,8 +113,22 @@
 //    [skView presentScene:scene];
 }
 
+- (void)incrementMoves {
+    self.moves += 1;
+    
+    if (self.moves % 4 == 0)
+        [self.hero takeDamage:1];
+    
+    [self updateLabels];
+    
+    if (self.hero.currentHp <= 0) {
+        self.gameOverLabel.text = @"You Died!";
+        [self showGameOver];
+    }
+}
+
 - (void)updateLabels {
-    self.scoreLabel.text = [NSString stringWithFormat:@"%lu", (long) self.score];
+    self.heroHpLabel.text = [NSString stringWithFormat:@"%lu", (long) self.hero.currentHp];
     self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.moves];
 }
 
@@ -135,6 +156,7 @@
 - (void)beginGame {
     self.score = 0;
     self.moves = 0;
+    [self.hero reset];
     [self updateLabels];
     
     [self shuffle];
@@ -176,10 +198,30 @@
 - (void)beginNextTurn {
     [self.level detectPossibleSwaps];
     self.view.userInteractionEnabled = YES;
+    
+    [self incrementMoves];
 }
 
 - (IBAction)shuffleButtonPressed:(id)sender {
     [self shuffle];
+}
+
+- (void)showGameOver {
+    self.gameOverLabel.hidden = NO;
+    self.scene.userInteractionEnabled = NO;
+    
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameOver)];
+    [self.view addGestureRecognizer:self.tapGestureRecognizer];
+}
+
+- (void)hideGameOver {
+    [self.view removeGestureRecognizer:self.tapGestureRecognizer];
+    self.tapGestureRecognizer = nil;
+    
+    self.gameOverLabel.hidden = YES;
+    self.scene.userInteractionEnabled = YES;
+    
+    [self beginGame];
 }
 
 @end
