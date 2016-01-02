@@ -12,9 +12,11 @@
 #import "Swap.h"
 #import "Chain.h"
 #import "Hero.h"
+#import "Enemy.h"
 
 @interface GameViewController ()
 @property (nonatomic, strong) Hero *hero;
+@property (nonatomic, strong) Enemy *enemy;
 @property (nonatomic, strong) Level *level;
 @property (nonatomic, strong) GameScene *scene;
 @property (nonatomic, assign) NSUInteger score;
@@ -22,6 +24,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *heroHpLabel;
 @property (nonatomic, weak) IBOutlet UILabel *movesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *enemyHpLabel;
 @property (nonatomic, weak) IBOutlet UILabel *gameOverLabel;
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
@@ -91,6 +94,7 @@
     [skView presentScene:self.scene];
     
     self.hero = [[Hero alloc] init];
+    self.enemy = nil;
     
     // start game!
     [self beginGame];
@@ -116,10 +120,18 @@
 - (void)incrementMoves {
     self.moves += 1;
     
-    if (self.moves % 4 == 0)
-        [self.hero takeDamage:1];
+    if (self.enemy)
+        [self.enemy decrementAttackTurn];
     
     [self updateLabels];
+    
+    if (self.enemy && self.enemy.currentAttackTurns == 0) {
+        [self.hero takeDamage:self.enemy.attack];
+        [self.enemy refreshAttackTurns];
+        [self updateLabels];
+        
+        NSLog(@"Enemy attacks Hero for %ld damage!", self.enemy.attack);
+    }
     
     if (self.hero.currentHp <= 0) {
         self.gameOverLabel.text = @"You Died!";
@@ -129,7 +141,8 @@
 
 - (void)updateLabels {
     self.heroHpLabel.text = [NSString stringWithFormat:@"%lu", (long) self.hero.currentHp];
-    self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.moves];
+    self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.enemy.currentAttackTurns];
+    self.enemyHpLabel.text = [NSString stringWithFormat:@"%lu", (long) self.enemy.currentHp];
 }
 
 - (BOOL)shouldAutorotate {
@@ -157,6 +170,7 @@
     self.score = 0;
     self.moves = 0;
     [self.hero reset];
+    self.enemy = [[Enemy alloc] init];
     [self updateLabels];
     
     [self shuffle];
@@ -179,10 +193,14 @@
     }
     
     [self.scene animateMatchedCookies:chains completion:^{
+        NSUInteger score = 0;
+        
         for (Chain *chain in chains) {
             self.score += chain.score;
+            score += chain.score;
         }
         
+        NSLog(@"score: %ld", score);
         [self updateLabels];
         
         NSArray *columns = [self.level fillHoles];
