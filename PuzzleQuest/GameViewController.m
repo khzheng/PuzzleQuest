@@ -123,6 +123,14 @@
     if (self.enemy)
         [self.enemy decrementAttackTurn];
     
+    if (self.enemy && self.enemy.currentHp <= 0) {
+        NSLog(@"Hero killed enemy!");
+        // TODO: award xp to hero
+        
+        // generate new enemy
+        self.enemy = [[Enemy alloc] init];
+    }
+    
     [self updateLabels];
     
     if (self.enemy && self.enemy.currentAttackTurns == 0) {
@@ -140,9 +148,9 @@
 }
 
 - (void)updateLabels {
-    self.heroHpLabel.text = [NSString stringWithFormat:@"%lu", (long) self.hero.currentHp];
+    self.heroHpLabel.text = [NSString stringWithFormat:@"%ld", (long) self.hero.currentHp];
     self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.enemy.currentAttackTurns];
-    self.enemyHpLabel.text = [NSString stringWithFormat:@"%lu", (long) self.enemy.currentHp];
+    self.enemyHpLabel.text = [NSString stringWithFormat:@"%ld", (long) self.enemy.currentHp];
 }
 
 - (BOOL)shouldAutorotate {
@@ -200,7 +208,11 @@
             score += chain.score;
         }
         
-        NSLog(@"score: %ld", score);
+        if (self.enemy) {
+            [self.enemy takeDamage:score];
+            NSLog(@"Hero attacks enemy for %ld damage!", score);
+        }
+        
         [self updateLabels];
         
         NSArray *columns = [self.level fillHoles];

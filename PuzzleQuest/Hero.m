@@ -9,6 +9,7 @@
 #import "Hero.h"
 
 #define INITIAL_HP  10
+#define INITIAL_ATK 1
 
 @implementation Hero
 
@@ -17,6 +18,7 @@
     
     if (self) {
         _maxHp = _currentHp = INITIAL_HP;
+        _attack = INITIAL_ATK;
     }
     
     return self;

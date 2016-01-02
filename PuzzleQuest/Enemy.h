@@ -11,12 +11,13 @@
 @interface Enemy : NSObject
 
 @property (nonatomic, readonly) NSUInteger maxHp;
-@property (nonatomic, readonly) NSUInteger currentHp;
+@property (nonatomic, readonly) NSInteger currentHp;
 @property (nonatomic, readonly) NSUInteger attack;
 @property (nonatomic, readonly) NSUInteger attackTurns;
 @property (nonatomic, readonly) NSUInteger currentAttackTurns;
 
 - (void)decrementAttackTurn;
 - (void)refreshAttackTurns;
+- (void)takeDamage:(NSInteger)damage;
 
 @end

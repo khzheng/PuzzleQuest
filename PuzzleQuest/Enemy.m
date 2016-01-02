@@ -16,7 +16,8 @@
     self = [super init];
     
     if (self) {
-        _maxHp = _currentHp = INITIAL_HP;
+        _maxHp = INITIAL_HP;
+        _currentHp = INITIAL_HP;
         _attack = 1;
         _attackTurns = _currentAttackTurns = INITIAL_ATTACK_TURNS;
     }
@@ -30,6 +31,10 @@
 
 - (void)refreshAttackTurns {
     _currentAttackTurns = _attackTurns;
+}
+
+- (void)takeDamage:(NSInteger)damage {
+    _currentHp -= damage;
 }
 
 @end

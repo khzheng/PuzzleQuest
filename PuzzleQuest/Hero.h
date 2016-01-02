@@ -11,7 +11,8 @@
 @interface Hero : NSObject
 
 @property (nonatomic, assign, readonly) NSUInteger maxHp;
-@property (nonatomic, assign, readonly) NSUInteger currentHp;
+@property (nonatomic, assign, readonly) NSInteger currentHp;
+@property (nonatomic, assign, readonly) NSUInteger attack;
 
 - (void)takeDamage:(NSInteger)damage;
 - (void)reset;
