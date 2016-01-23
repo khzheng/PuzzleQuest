@@ -66,13 +66,22 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAi-wx-24t">
+                                <rect key="frame" x="283" y="512" width="34" height="30"/>
+                                <state key="normal" title="Hero"/>
+                                <connections>
+                                    <action selector="heroButtonPressed:" destination="LVB-YS-i5n" eventType="touchUpInside" id="zVw-aU-B4A"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Iyq-Xs-OlE" firstAttribute="centerX" secondItem="fzS-7H-hKe" secondAttribute="centerX" id="63e-Zd-eA1"/>
+                            <constraint firstItem="K5Q-iE-2hd" firstAttribute="top" secondItem="oAi-wx-24t" secondAttribute="bottom" constant="8" id="9tl-94-f2e"/>
                             <constraint firstItem="K5Q-iE-2hd" firstAttribute="centerX" secondItem="bdc-N1-crn" secondAttribute="centerX" id="M13-rt-B8l"/>
                             <constraint firstItem="xdg-LH-dFc" firstAttribute="top" secondItem="GmL-pP-Vb8" secondAttribute="bottom" constant="8" id="Ml5-66-pQa"/>
                             <constraint firstItem="Win-BA-qI2" firstAttribute="top" secondItem="eXI-P8-MzC" secondAttribute="bottom" constant="8" id="UwJ-Oc-lZh"/>
+                            <constraint firstItem="oAi-wx-24t" firstAttribute="centerX" secondItem="bdc-N1-crn" secondAttribute="centerX" id="V12-44-zWv"/>
                             <constraint firstItem="GmL-pP-Vb8" firstAttribute="leading" secondItem="fzS-7H-hKe" secondAttribute="trailing" constant="63" id="WHL-8P-7Ni"/>
                             <constraint firstItem="Iyq-Xs-OlE" firstAttribute="top" secondItem="fzS-7H-hKe" secondAttribute="bottom" constant="8" id="Wd9-Mg-Wrx"/>
                             <constraint firstItem="fzS-7H-hKe" firstAttribute="centerX" secondItem="bdc-N1-crn" secondAttribute="centerX" id="XQ2-hM-R8i"/>

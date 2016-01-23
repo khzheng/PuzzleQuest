@@ -19,6 +19,7 @@
     if (self) {
         _maxHp = _currentHp = INITIAL_HP;
         _attack = INITIAL_ATK;
+        _xp = 0;
     }
     
     return self;
@@ -30,6 +31,28 @@
 
 - (void)reset {
     _maxHp = _currentHp = INITIAL_HP;
+}
+
+- (void)awardXp:(NSUInteger)xp {
+    NSUInteger currentLevel = [self level];
+    
+    _xp += xp;
+    
+    NSUInteger newLevel = [self level];
+    if (newLevel != currentLevel) {
+        NSLog(@"Hero leveled up! LVL %lu -> %lu", currentLevel, newLevel);
+        // TODO: actually level up
+    }
+}
+
+- (NSUInteger)level {
+    const float constant = 1.0;
+    
+    return (NSUInteger)(constant * sqrt(_xp));
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"<Hero> LVL: %lu, HP: %ld/%lu, ATT: %lu, XP: %lu", [self level], _currentHp, _maxHp, _attack, _xp];
 }
 
 @end

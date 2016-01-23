@@ -13,8 +13,11 @@
 @property (nonatomic, assign, readonly) NSUInteger maxHp;
 @property (nonatomic, assign, readonly) NSInteger currentHp;
 @property (nonatomic, assign, readonly) NSUInteger attack;
+@property (nonatomic, assign, readonly) NSUInteger xp;
 
 - (void)takeDamage:(NSInteger)damage;
 - (void)reset;
+- (void)awardXp:(NSUInteger)xp;
+- (NSUInteger)level;
 
 @end

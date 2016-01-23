@@ -42,7 +42,7 @@
         
         [self detectPossibleSwaps];
         
-        NSLog(@"possible swaps: %@", self.possibleSwaps);
+//        NSLog(@"possible swaps: %@", self.possibleSwaps);
     } while ([self.possibleSwaps count] == 0);
     
 //    for (NSInteger column = 0; column < NumColumns; column++) {

@@ -94,6 +94,8 @@
     [skView presentScene:self.scene];
     
     self.hero = [[Hero alloc] init];
+    NSLog(@"Starting Hero: %@", self.hero);
+    
     self.enemy = nil;
     
     // start game!
@@ -124,8 +126,9 @@
         [self.enemy decrementAttackTurn];
     
     if (self.enemy && self.enemy.currentHp <= 0) {
-        NSLog(@"Hero killed enemy!");
-        // TODO: award xp to hero
+        NSLog(@"Hero killed enemy! Gained %lu xp.", [self.enemy xp]);
+        
+        [self.hero awardXp:[self.enemy xp]];
         
         // generate new enemy
         self.enemy = [[Enemy alloc] init];
@@ -232,10 +235,6 @@
     [self incrementMoves];
 }
 
-- (IBAction)shuffleButtonPressed:(id)sender {
-    [self shuffle];
-}
-
 - (void)showGameOver {
     self.gameOverLabel.hidden = NO;
     self.scene.userInteractionEnabled = NO;
@@ -252,6 +251,16 @@
     self.scene.userInteractionEnabled = YES;
     
     [self beginGame];
+}
+
+#pragma mark - Actions
+
+- (IBAction)shuffleButtonPressed:(id)sender {
+    [self shuffle];
+}
+
+- (IBAction)heroButtonPressed:(id)sender {
+    NSLog(@"%@", self.hero);
 }
 
 @end

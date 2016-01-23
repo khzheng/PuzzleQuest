@@ -15,6 +15,7 @@
 @property (nonatomic, readonly) NSUInteger attack;
 @property (nonatomic, readonly) NSUInteger attackTurns;
 @property (nonatomic, readonly) NSUInteger currentAttackTurns;
+@property (nonatomic, readonly) NSUInteger xp;
 
 - (void)decrementAttackTurn;
 - (void)refreshAttackTurns;
