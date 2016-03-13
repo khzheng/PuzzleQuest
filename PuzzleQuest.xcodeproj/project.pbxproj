@@ -10,6 +10,7 @@
 		EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = EB021BF81B3CD8F9005ADF09 /* Chain.m */; };
 		EB12CC301C384BDD0056EF72 /* Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12CC2F1C384BDD0056EF72 /* Hero.m */; };
 		EB271F471C961A9600E70512 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB271F461C961A9600E70512 /* GameView.m */; };
+		EB271F4A1C961F8500E70512 /* HealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EB271F491C961F8500E70512 /* HealthBar.m */; };
 		EB523E9A1C385CCF00EB573C /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = EB523E991C385CCF00EB573C /* Enemy.m */; };
 		EBFF547F1B390B59006972D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF547E1B390B59006972D7 /* main.m */; };
 		EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54811B390B59006972D7 /* AppDelegate.m */; };
@@ -43,6 +44,8 @@
 		EB12CC2F1C384BDD0056EF72 /* Hero.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hero.m; sourceTree = "<group>"; };
 		EB271F451C961A9600E70512 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		EB271F461C961A9600E70512 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		EB271F481C961F8500E70512 /* HealthBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthBar.h; sourceTree = "<group>"; };
+		EB271F491C961F8500E70512 /* HealthBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthBar.m; sourceTree = "<group>"; };
 		EB523E981C385CCF00EB573C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		EB523E991C385CCF00EB573C /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
 		EBFF54791B390B59006972D7 /* PuzzleQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +140,8 @@
 				EB523E991C385CCF00EB573C /* Enemy.m */,
 				EB271F451C961A9600E70512 /* GameView.h */,
 				EB271F461C961A9600E70512 /* GameView.m */,
+				EB271F481C961F8500E70512 /* HealthBar.h */,
+				EB271F491C961F8500E70512 /* HealthBar.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBFF54B21B3912B6006972D7 /* Level.m in Sources */,
+				EB271F4A1C961F8500E70512 /* HealthBar.m in Sources */,
 				EBFF548A1B390B59006972D7 /* GameViewController.m in Sources */,
 				EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */,
 				EBFF54851B390B59006972D7 /* GameScene.m in Sources */,

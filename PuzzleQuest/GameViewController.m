@@ -16,6 +16,8 @@
 #import "Enemy.h"
 
 @interface GameViewController ()
+@property (nonatomic, strong) GameView *gameView;
+
 @property (nonatomic, strong) Hero *hero;
 @property (nonatomic, strong) Enemy *enemy;
 @property (nonatomic, strong) Level *level;
@@ -62,7 +64,8 @@
 }
 
 - (void)loadView {
-    self.view = [[GameView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.gameView = [[GameView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.view = self.gameView;
 }
 
 - (void)viewDidLoad {
@@ -109,6 +112,8 @@
     
     self.hero = [[Hero alloc] init];
     NSLog(@"Starting Hero: %@", self.hero);
+    
+    
     
     self.enemy = nil;
     
@@ -165,6 +170,10 @@
 }
 
 - (void)updateLabels {
+    double heroHpPercentage = self.hero.currentHp / (double)self.hero.maxHp;
+    self.gameView.hpBar.percentage = heroHpPercentage;
+    self.gameView.hpBar.displayString = [NSString stringWithFormat:@"%ld/%ld", self.hero.currentHp, self.hero.maxHp];
+    
     self.heroHpLabel.text = [NSString stringWithFormat:@"%ld", (long) self.hero.currentHp];
     self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.enemy.currentAttackTurns];
     self.enemyHpLabel.text = [NSString stringWithFormat:@"%ld", (long) self.enemy.currentHp];

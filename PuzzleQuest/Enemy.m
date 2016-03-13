@@ -7,8 +7,8 @@
 //
 
 #import "Enemy.h"
-#define INITIAL_HP  5
-#define INITIAL_ATTACK_TURNS    4
+#define INITIAL_HP  10
+#define INITIAL_ATTACK_TURNS    2
 
 @implementation Enemy
 
