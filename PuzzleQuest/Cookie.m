@@ -50,6 +50,10 @@
 
 - (NSString *)spriteName {
     static NSString * const spriteNames[] = {
+        @"Sword",
+        @"Shield",
+        @"Heart",
+        @"Gold",
         @"Croissant",
         @"Cupcake",
         @"Danish",
@@ -76,6 +80,10 @@
 
 - (NSString *)specialSpriteName {
     static NSString * const specialSpriteNames[] = {
+        @"Sword",
+        @"Shield",
+        @"Heart",
+        @"Gold",
         @"Croissant-special",
         @"Cupcake-special",
         @"Danish-special",

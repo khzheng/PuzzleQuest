@@ -12,7 +12,7 @@
 #import "Swap.h"
 #import "Chain.h"
 
-static const CGFloat TileWidth = 32.0;
+static const CGFloat TileWidth = 36.0;
 static const CGFloat TileHeight = 36.0;
 
 @interface GameScene ()
@@ -77,7 +77,7 @@ static const CGFloat TileHeight = 36.0;
     for (NSInteger row = 0; row < NumRows; row++) {
         for (NSInteger column = 0; column < NumColumns; column++) {
             if ([self.level tileAtColumn:column row:row] != nil) {
-                SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Tile"];
+                SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Tile-alt"];
                 sprite.position = [self pointForColumn:column row:row];
                 [self.tilesLayer addChild:sprite];
             }

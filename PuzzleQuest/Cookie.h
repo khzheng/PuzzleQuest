@@ -10,7 +10,7 @@
 
 @import SpriteKit;
 
-static const NSUInteger NumberCookieTypes = 6;
+static const NSUInteger NumberCookieTypes = 4;
 
 @interface Cookie : NSObject
 
