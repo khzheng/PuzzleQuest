@@ -113,8 +113,6 @@
     self.hero = [[Hero alloc] init];
     NSLog(@"Starting Hero: %@", self.hero);
     
-    
-    
     self.enemy = nil;
     
     // start game!
@@ -229,14 +227,49 @@
     [self.scene animateMatchedCookies:chains completion:^{
         NSUInteger score = 0;
         
+        // tally points (swords, shields, health, and gold)
+        NSInteger attack = 0;
+        NSInteger shield = 0;
+        NSInteger health = 0;
+        NSInteger gold = 0;
         for (Chain *chain in chains) {
+            CookieType type = [chain cookieType];
+            switch (type) {
+                case SwordType:
+                    attack += chain.score;
+                    break;
+                case ShieldType:
+                    shield += chain.score;
+                    break;
+                case HeartType:
+                    health += chain.score;
+                    break;
+                case GoldType:
+                    gold += chain.score;
+                    break;
+                default:
+                    break;
+            }
+            
             self.score += chain.score;
             score += chain.score;
         }
         
-        if (self.enemy) {
-            [self.enemy takeDamage:score];
-            NSLog(@"Hero attacks enemy for %ld damage!", score);
+        // apply points
+        if (attack > 0) {
+            if (self.enemy) {
+                [self.enemy takeDamage:attack];
+                NSLog(@"Hero attacks enemy for %ld damage!", attack);
+            }
+        }
+        if (shield > 0) {
+            
+        }
+        if (health > 0) {
+            
+        }
+        if (gold < 0) {
+            
         }
         
         [self updateLabels];

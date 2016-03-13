@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class Cookie;
+#import "Cookie.h"
 
 typedef NS_ENUM(NSUInteger, ChainType) {
     ChainTypeHorizontal,
@@ -30,5 +29,6 @@ typedef NS_ENUM(NSUInteger, ChainType) {
 - (BOOL)intersectsChain:(Chain *)chain;
 - (Cookie *)intersectingCookie:(Chain *)chain;
 - (BOOL)containsCookie:(Cookie *)cookie;
+- (CookieType)cookieType;
 
 @end

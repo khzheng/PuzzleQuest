@@ -10,13 +10,20 @@
 
 @import SpriteKit;
 
+typedef NS_ENUM(NSInteger, CookieType) {
+    SwordType = 1,
+    ShieldType,
+    HeartType,
+    GoldType
+};
+
 static const NSUInteger NumberCookieTypes = 4;
 
 @interface Cookie : NSObject
 
 @property (assign, nonatomic) NSInteger column;
 @property (assign, nonatomic) NSInteger row;
-@property (assign, nonatomic) NSUInteger cookieType;
+@property (assign, nonatomic) CookieType cookieType;
 @property (strong, nonatomic) SKSpriteNode *sprite;
 @property (assign, nonatomic) BOOL isSpecial;
 

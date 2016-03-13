@@ -37,6 +37,10 @@
     return [self.cookies containsObject:cookie];
 }
 
+- (CookieType)cookieType {
+    return [(Cookie *)_cookies[0] cookieType];
+}
+
 - (NSArray *)cookies {
     return _cookies;
 }
