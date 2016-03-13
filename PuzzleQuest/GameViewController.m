@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import "GameView.h"
 #import "Level.h"
 #import "GameScene.h"
 #import "Swap.h"
@@ -51,11 +52,24 @@
 
 @implementation GameViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
+- (void)loadView {
+    self.view = [[GameView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // Configure the view.
-    SKView *skView = (SKView *)self.view;
+    SKView *skView = ((GameView *)self.view).skView;
     skView.multipleTouchEnabled = NO;
     
     // Create and configure scene

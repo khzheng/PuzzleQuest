@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = EB021BF81B3CD8F9005ADF09 /* Chain.m */; };
 		EB12CC301C384BDD0056EF72 /* Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = EB12CC2F1C384BDD0056EF72 /* Hero.m */; };
+		EB271F471C961A9600E70512 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB271F461C961A9600E70512 /* GameView.m */; };
 		EB523E9A1C385CCF00EB573C /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = EB523E991C385CCF00EB573C /* Enemy.m */; };
 		EBFF547F1B390B59006972D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF547E1B390B59006972D7 /* main.m */; };
 		EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54811B390B59006972D7 /* AppDelegate.m */; };
 		EBFF54851B390B59006972D7 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54841B390B59006972D7 /* GameScene.m */; };
 		EBFF54871B390B59006972D7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54861B390B59006972D7 /* GameScene.sks */; };
 		EBFF548A1B390B59006972D7 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54891B390B59006972D7 /* GameViewController.m */; };
-		EBFF548D1B390B59006972D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBFF548B1B390B59006972D7 /* Main.storyboard */; };
 		EBFF548F1B390B59006972D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBFF548E1B390B59006972D7 /* Images.xcassets */; };
 		EBFF54921B390B59006972D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBFF54901B390B59006972D7 /* LaunchScreen.xib */; };
 		EBFF549E1B390B59006972D7 /* PuzzleQuestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF549D1B390B59006972D7 /* PuzzleQuestTests.m */; };
@@ -41,6 +41,8 @@
 		EB021BF81B3CD8F9005ADF09 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chain.m; sourceTree = "<group>"; };
 		EB12CC2E1C384BDD0056EF72 /* Hero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hero.h; sourceTree = "<group>"; };
 		EB12CC2F1C384BDD0056EF72 /* Hero.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hero.m; sourceTree = "<group>"; };
+		EB271F451C961A9600E70512 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		EB271F461C961A9600E70512 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
 		EB523E981C385CCF00EB573C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		EB523E991C385CCF00EB573C /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
 		EBFF54791B390B59006972D7 /* PuzzleQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,7 +55,6 @@
 		EBFF54861B390B59006972D7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		EBFF54881B390B59006972D7 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		EBFF54891B390B59006972D7 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		EBFF548C1B390B59006972D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EBFF548E1B390B59006972D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EBFF54911B390B59006972D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		EBFF54971B390B59006972D7 /* PuzzleQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuzzleQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,7 +118,6 @@
 				EBFF54881B390B59006972D7 /* GameViewController.h */,
 				EBFF54891B390B59006972D7 /* GameViewController.m */,
 				EBFF54AB1B3910BA006972D7 /* Sprites.atlas */,
-				EBFF548B1B390B59006972D7 /* Main.storyboard */,
 				EBFF548E1B390B59006972D7 /* Images.xcassets */,
 				EBFF54901B390B59006972D7 /* LaunchScreen.xib */,
 				EBFF547C1B390B59006972D7 /* Supporting Files */,
@@ -135,6 +135,8 @@
 				EB12CC2F1C384BDD0056EF72 /* Hero.m */,
 				EB523E981C385CCF00EB573C /* Enemy.h */,
 				EB523E991C385CCF00EB573C /* Enemy.m */,
+				EB271F451C961A9600E70512 /* GameView.h */,
+				EB271F461C961A9600E70512 /* GameView.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -249,7 +251,6 @@
 				EBFF54921B390B59006972D7 /* LaunchScreen.xib in Resources */,
 				EBFF548F1B390B59006972D7 /* Images.xcassets in Resources */,
 				EBFF54871B390B59006972D7 /* GameScene.sks in Resources */,
-				EBFF548D1B390B59006972D7 /* Main.storyboard in Resources */,
 				EBFF54AC1B3910BA006972D7 /* Sprites.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +275,7 @@
 				EBFF54851B390B59006972D7 /* GameScene.m in Sources */,
 				EBFF54B81B3A4869006972D7 /* Swap.m in Sources */,
 				EB12CC301C384BDD0056EF72 /* Hero.m in Sources */,
+				EB271F471C961A9600E70512 /* GameView.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
 				EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */,
 				EBFF54B51B391928006972D7 /* Tile.m in Sources */,
@@ -301,14 +303,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		EBFF548B1B390B59006972D7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EBFF548C1B390B59006972D7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		EBFF54901B390B59006972D7 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
