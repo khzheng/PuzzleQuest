@@ -16,6 +16,7 @@
 @property (nonatomic, assign, readonly) NSUInteger xp;
 
 - (void)takeDamage:(NSInteger)damage;
+- (NSInteger)heal:(NSInteger)healAmount;
 - (void)reset;
 - (void)awardXp:(NSUInteger)xp;
 - (NSUInteger)level;

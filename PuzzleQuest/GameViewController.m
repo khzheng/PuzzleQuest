@@ -266,7 +266,9 @@
             
         }
         if (health > 0) {
-            
+            NSInteger healAmount = [self.hero heal:health];
+            if (healAmount > 0)
+                NSLog(@"Hero heals for %ld health!", healAmount);
         }
         if (gold < 0) {
             

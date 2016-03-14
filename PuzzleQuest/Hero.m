@@ -8,7 +8,7 @@
 
 #import "Hero.h"
 
-#define INITIAL_HP  10
+#define INITIAL_HP  30
 #define INITIAL_ATK 1
 
 @implementation Hero
@@ -27,6 +27,19 @@
 
 - (void)takeDamage:(NSInteger)damage {
     _currentHp -= damage;
+}
+
+- (NSInteger)heal:(NSInteger)healAmount {
+    if (healAmount <= 0)
+        return 0;
+    
+    if (self.currentHp + healAmount > self.maxHp) {
+        healAmount = self.maxHp - self.currentHp;
+    }
+    
+    _currentHp += healAmount;
+    
+    return healAmount;
 }
 
 - (void)reset {

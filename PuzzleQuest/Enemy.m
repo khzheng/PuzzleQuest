@@ -18,7 +18,7 @@
     if (self) {
         _maxHp = INITIAL_HP;
         _currentHp = INITIAL_HP;
-        _attack = 1;
+        _attack = 2;
         _attackTurns = _currentAttackTurns = INITIAL_ATTACK_TURNS;
         _xp = 1;
     }
