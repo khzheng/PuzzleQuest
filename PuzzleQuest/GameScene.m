@@ -22,6 +22,7 @@ static const CGFloat TileHeight = 36.0;
 @property (assign, nonatomic) NSInteger swipeFromColumn;// records cookie swiped
 @property (assign, nonatomic) NSInteger swipeFromRow;   // records cookie swiped
 @property (nonatomic, strong) SKSpriteNode *selectionSprite;
+@property (nonatomic, strong) SKSpriteNode *targetSprite;
 @end
 
 @implementation GameScene
@@ -49,6 +50,7 @@ static const CGFloat TileHeight = 36.0;
         
         self.swipeFromColumn = self.swipeFromRow = NSNotFound;
         self.selectionSprite = [SKSpriteNode node];
+        self.targetSprite = [SKSpriteNode node];
     }
     
     return self;
@@ -103,6 +105,10 @@ static const CGFloat TileHeight = 36.0;
             // record swiped column, row
             self.swipeFromColumn = column;
             self.swipeFromRow = row;
+            
+            if (cookie.cookieType == SkullType) {
+                [self showTargetIndicatorForCookie:cookie];
+            }
         }
     }
 }
@@ -337,6 +343,23 @@ static const CGFloat TileHeight = 36.0;
 - (void)hideSelectionIndicator {
     [self.selectionSprite runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:0.3],
                                                          [SKAction removeFromParent]]]];
+}
+
+- (void)showTargetIndicatorForCookie:(Cookie *)cookie {
+    // if target indicator is visible, remove it
+    if (self.targetSprite.parent != nil)
+        [self.targetSprite removeFromParent];
+    
+    SKTexture *texture = [SKTexture textureWithImageNamed:@"Target"];
+    self.targetSprite.size = texture.size;
+    [self.targetSprite runAction:[SKAction setTexture:texture]];
+    
+    [cookie.sprite addChild:self.targetSprite];
+    self.targetSprite.alpha = 1.0;
+}
+
+- (void)hideTargetIndicator {
+    [self.targetSprite runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:0.3], [SKAction removeFromParent]]]];
 }
 
 - (void)removeAllCookieSprites {
