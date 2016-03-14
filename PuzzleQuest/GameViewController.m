@@ -141,27 +141,27 @@
 - (void)incrementMoves {
     self.moves += 1;
     
-    if (self.enemy)
-        [self.enemy decrementAttackTurn];
+//    if (self.enemy)
+//        [self.enemy decrementAttackTurn];
     
-    if (self.enemy && self.enemy.currentHp <= 0) {
-        NSLog(@"Hero killed enemy! Gained %lu xp.", [self.enemy xp]);
-        
-        [self.hero awardXp:[self.enemy xp]];
-        
-        // generate new enemy
-        self.enemy = [[Enemy alloc] init];
-    }
+//    if (self.enemy && self.enemy.currentHp <= 0) {
+//        NSLog(@"Hero killed enemy! Gained %lu xp.", [self.enemy xp]);
+//        
+//        [self.hero awardXp:[self.enemy xp]];
+//        
+//        // generate new enemy
+//        self.enemy = [[Enemy alloc] init];
+//    }
     
     [self updateLabels];
     
-    if (self.enemy && self.enemy.currentAttackTurns == 0) {
-        [self.hero takeDamage:self.enemy.attack];
-        [self.enemy refreshAttackTurns];
-        [self updateLabels];
-        
-        NSLog(@"Enemy attacks Hero for %ld damage!", self.enemy.attack);
-    }
+//    if (self.enemy && self.enemy.currentAttackTurns == 0) {
+//        [self.hero takeDamage:self.enemy.attack];
+//        [self.enemy refreshAttackTurns];
+//        [self updateLabels];
+//        
+//        NSLog(@"Enemy attacks Hero for %ld damage!", self.enemy.attack);
+//    }
     
     if (self.hero.currentHp <= 0) {
         self.gameOverLabel.text = @"You Died!";
@@ -234,6 +234,7 @@
         NSInteger shield = 0;
         NSInteger health = 0;
         NSInteger gold = 0;
+        NSInteger skull = 0;
         for (Chain *chain in chains) {
             CookieType type = [chain cookieType];
             switch (type) {
@@ -249,6 +250,8 @@
                 case GoldType:
                     gold += chain.score;
                     break;
+                case SkullType:
+                    skull += chain.score;
                 default:
                     break;
             }
@@ -275,12 +278,19 @@
         if (gold < 0) {
             
         }
+        if (skull > 0) {
+            [self.hero takeDamage:skull];
+            NSLog(@"Hero takes %ld damage!", skull);
+        }
         
         [self updateLabels];
         
         NSArray *columns = [self.level fillHoles];
         [self.scene animateFallingCookies:columns completion:^{
             NSArray *columns = [self.level topUpCookies];
+            
+            // TODO: create enemies for each created enemy
+            
             [self.scene animateNewCookies:columns completion:^{
                 [self handleMatches];
             }];

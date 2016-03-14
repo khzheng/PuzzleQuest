@@ -463,7 +463,7 @@
                 NSUInteger newCookieType;
                 do {
                     // +1 for skull generation
-                    newCookieType = arc4random_uniform(NumberCookieTypes) + 1 + 1;
+                    newCookieType = arc4random_uniform(NumberCookieTypes + 1) + 1;
                 } while (newCookieType == cookieType);
                 cookieType = newCookieType;
                 

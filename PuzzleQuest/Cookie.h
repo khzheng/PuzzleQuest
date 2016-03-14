@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, CookieType) {
     SwordType = 1,
     ShieldType,
     HeartType,
-    GoldType
+    GoldType,
+    SkullType
 };
 
 static const NSUInteger NumberCookieTypes = 4;
