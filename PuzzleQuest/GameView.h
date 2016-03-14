@@ -13,5 +13,6 @@
 
 @property (nonatomic, readonly) SKView *skView;
 @property (nonatomic, readonly) HealthBar *hpBar;
+@property (nonatomic, readonly) UIButton *shuffleButton;
 
 @end

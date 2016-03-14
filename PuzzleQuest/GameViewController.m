@@ -71,6 +71,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.gameView.shuffleButton addTarget:self action:@selector(shuffleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     // Configure the view.
     SKView *skView = ((GameView *)self.view).skView;
     skView.multipleTouchEnabled = NO;

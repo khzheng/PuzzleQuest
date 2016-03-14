@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UILabel *movesLabel;
 @property (nonatomic, strong) UILabel *enemyLabel;
 @property (nonatomic, strong) HealthBar *hpBar;
+@property (nonatomic, strong) UIButton *shuffleButton;
 @end
 
 @implementation GameView
@@ -33,6 +34,11 @@
         _hpBar = [[HealthBar alloc] initWithFrame:CGRectMake(0, 0, 54, 76)];
         _hpBar.barColor = [UIColor redColor];
         [self addSubview:_hpBar];
+        
+        _shuffleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_shuffleButton setTitle:@"Shuffle" forState:UIControlStateNormal];
+        [_shuffleButton sizeToFit];
+        [self addSubview:_shuffleButton];
     }
     
     return self;
@@ -50,6 +56,10 @@
     CGSize hpBarSize = self.hpBar.frame.size;
     CGRect hpBarRect = CGRectMake(bounds.size.width - hpBarSize.width, bounds.size.height - hpBarSize.height, hpBarSize.width, hpBarSize.height);
     self.hpBar.frame = hpBarRect;
+    
+    CGSize shuffleButtonSize = self.shuffleButton.frame.size;
+    CGRect shuffleButtonRect = CGRectMake(bounds.size.width/2.0 - shuffleButtonSize.width/2.0, bounds.size.height - 50, shuffleButtonSize.width, shuffleButtonSize.height);
+    self.shuffleButton.frame = shuffleButtonRect;
 }
 
 @end
