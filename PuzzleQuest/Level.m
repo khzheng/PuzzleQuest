@@ -14,6 +14,7 @@
 
 @interface Level ()
 @property (nonatomic, strong) NSSet *possibleSwaps;
+@property (nonatomic, strong) NSSet *enemyCookies;
 @end
 
 @implementation Level {
@@ -25,6 +26,7 @@
     self = [super init];
     if (self) {
         _movedCookies = [[NSMutableSet alloc] init];
+        _targetEnemyCookie = nil;
         
         // create tiles
         for (NSInteger row = 0; row < NumRows; row++)
@@ -186,6 +188,23 @@
     }
     
     self.possibleSwaps = set;
+}
+
+- (void)detectEnemyCookies {
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (NSInteger row = 0; row < NumRows; row++) {
+        for (NSInteger column = 0; column < NumColumns; column++) {
+            Cookie *cookie = _cookies[column][row];
+            if (cookie != nil) {
+                if (cookie.cookieType == SkullType) {
+                    [set addObject:cookie];
+                }
+            }
+        }
+    }
+
+    self.enemyCookies = set;
 }
 
 // a chain is 3 or more consecutive cookies of the same type in a row or column
@@ -484,13 +503,23 @@
 - (void)removeCookies:(NSSet *)chains {
     for (Chain *chain in chains)
         for (Cookie *cookie in chain.cookies)
-            if (!cookie.isSpecial)
+            if (!cookie.isSpecial) {
                 _cookies[cookie.column][cookie.row] = nil;
+                if ([cookie isEqualToCookie:_targetEnemyCookie])
+                    _targetEnemyCookie = nil;
+            }
 }
 
 - (void)calculateScores:(NSSet *)chains {
     for (Chain *chain in chains)
         chain.score = [chain.cookies count] - 2;
+}
+
+- (Cookie *)targetEnemyCookie {
+    if (_targetEnemyCookie == nil)
+        _targetEnemyCookie = [self.enemyCookies anyObject];
+    
+    return _targetEnemyCookie;
 }
 
 @end

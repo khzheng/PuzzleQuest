@@ -10,6 +10,7 @@
 
 @class Level;
 @class Swap;
+@class Cookie;
 
 @interface GameScene : SKScene
 
@@ -23,7 +24,7 @@
 - (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion;
 - (void)animateFallingCookies:(NSArray *)columns completion:(dispatch_block_t)completion;
 - (void)animateNewCookies:(NSArray *)columns completion:(dispatch_block_t)completion;
-
+- (void)showTargetIndicatorForCookie:(Cookie *)cookie;
 - (void)removeAllCookieSprites;
 
 @end

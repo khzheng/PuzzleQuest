@@ -262,10 +262,10 @@
         
         // apply points
         if (attack > 0) {
-            if (self.enemy) {
-                [self.enemy takeDamage:attack];
-                NSLog(@"Hero attacks enemy for %ld damage!", attack);
-            }
+//            if (self.enemy) {
+//                [self.enemy takeDamage:attack];
+//                NSLog(@"Hero attacks enemy for %ld damage!", attack);
+//            }
         }
         if (shield > 0) {
             
@@ -289,6 +289,8 @@
         [self.scene animateFallingCookies:columns completion:^{
             NSArray *columns = [self.level topUpCookies];
             
+//            [self.level detectEnemyCookies];
+            
             // TODO: create enemies for each created enemy
             
             [self.scene animateNewCookies:columns completion:^{
@@ -300,6 +302,13 @@
 
 - (void)beginNextTurn {
     [self.level detectPossibleSwaps];
+    
+    [self.level detectEnemyCookies];
+    Cookie *targetEnemyCookie = [self.level targetEnemyCookie];
+    if (targetEnemyCookie) {
+        [self.scene showTargetIndicatorForCookie:targetEnemyCookie];
+    }
+    
     self.view.userInteractionEnabled = YES;
     
     [self incrementMoves];

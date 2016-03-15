@@ -107,6 +107,7 @@ static const CGFloat TileHeight = 36.0;
             self.swipeFromRow = row;
             
             if (cookie.cookieType == SkullType) {
+                self.level.targetEnemyCookie = cookie;
                 [self showTargetIndicatorForCookie:cookie];
             }
         }
