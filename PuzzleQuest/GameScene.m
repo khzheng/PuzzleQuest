@@ -38,7 +38,8 @@ static const CGFloat TileHeight = 36.0;
         self.gameLayer = [SKNode node];
         [self addChild:self.gameLayer];
         
-        CGPoint layerPosition = CGPointMake(-TileWidth * NumColumns / 2, -TileHeight * NumRows / 2);
+        // align to bottom
+        CGPoint layerPosition = CGPointMake(-TileWidth * NumColumns / 2, -size.height / 2);
         
         self.tilesLayer = [SKNode node];
         self.tilesLayer.position = layerPosition;

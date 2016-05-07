@@ -29,7 +29,7 @@
         _hpLabel.textColor = [UIColor blackColor];
         _hpLabel.text = @"HP:";
         [_hpLabel sizeToFit];
-        [self addSubview:_hpLabel];
+//        [self addSubview:_hpLabel];
         
         _hpBar = [[HealthBar alloc] initWithFrame:CGRectMake(0, 0, 54, 76)];
         _hpBar.barColor = [UIColor redColor];
@@ -54,11 +54,17 @@
     self.hpLabel.frame = hpLabelRect;
     
     CGSize hpBarSize = self.hpBar.frame.size;
-    CGRect hpBarRect = CGRectMake(bounds.size.width - hpBarSize.width, bounds.size.height - hpBarSize.height, hpBarSize.width, hpBarSize.height);
+    CGRect hpBarRect = CGRectMake(bounds.size.width - hpBarSize.width,
+                                  0,
+                                  hpBarSize.width,
+                                  hpBarSize.height);
     self.hpBar.frame = hpBarRect;
     
     CGSize shuffleButtonSize = self.shuffleButton.frame.size;
-    CGRect shuffleButtonRect = CGRectMake(bounds.size.width/2.0 - shuffleButtonSize.width/2.0, bounds.size.height - 50, shuffleButtonSize.width, shuffleButtonSize.height);
+    CGRect shuffleButtonRect = CGRectMake(bounds.size.width/2.0 - shuffleButtonSize.width/2.0,
+                                          20,
+                                          shuffleButtonSize.width,
+                                          shuffleButtonSize.height);
     self.shuffleButton.frame = shuffleButtonRect;
 }
 
