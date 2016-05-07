@@ -6,9 +6,9 @@
 //  Copyright © 2016 Ken Zheng. All rights reserved.
 //
 
-#import "GameView.h"
+#import "PuzzleView.h"
 
-@interface GameView()
+@interface PuzzleView()
 @property (nonatomic, strong) SKView *skView;
 @property (nonatomic, strong) UILabel *hpLabel;
 @property (nonatomic, strong) UILabel *movesLabel;
@@ -17,7 +17,7 @@
 @property (nonatomic, strong) UIButton *shuffleButton;
 @end
 
-@implementation GameView
+@implementation PuzzleView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

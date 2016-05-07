@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Ken Zheng. All rights reserved.
 //
 
-#import "GameScene.h"
+#import "PuzzleScene.h"
 #import "Level.h"
 #import "Cookie.h"
 #import "Swap.h"
@@ -15,7 +15,7 @@
 static const CGFloat TileWidth = 36.0;
 static const CGFloat TileHeight = 36.0;
 
-@interface GameScene ()
+@interface PuzzleScene ()
 @property (strong, nonatomic) SKNode *gameLayer;        // base layer for all other layers, is centered on screen
 @property (strong, nonatomic) SKNode *cookiesLayer;     // cookies get added here
 @property (strong, nonatomic) SKNode *tilesLayer;       // tiles get added here
@@ -25,7 +25,7 @@ static const CGFloat TileHeight = 36.0;
 @property (nonatomic, strong) SKSpriteNode *targetSprite;
 @end
 
-@implementation GameScene
+@implementation PuzzleScene
 
 - (instancetype)initWithSize:(CGSize)size {
     self = [super initWithSize:size];

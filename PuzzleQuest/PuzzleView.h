@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "HealthBar.h"
 
-@interface GameView : UIView
+@interface PuzzleView : UIView
 
 @property (nonatomic, readonly) SKView *skView;
 @property (nonatomic, readonly) HealthBar *hpBar;

@@ -12,7 +12,7 @@
 @class Swap;
 @class Cookie;
 
-@interface GameScene : SKScene
+@interface PuzzleScene : SKScene
 
 @property (nonatomic, strong) Level *level;
 @property (copy, nonatomic) void (^swipeHandler)(Swap *swap);

@@ -6,22 +6,22 @@
 //  Copyright (c) 2015 Ken Zheng. All rights reserved.
 //
 
-#import "GameViewController.h"
-#import "GameView.h"
+#import "PuzzleViewController.h"
+#import "PuzzleView.h"
 #import "Level.h"
-#import "GameScene.h"
+#import "PuzzleScene.h"
 #import "Swap.h"
 #import "Chain.h"
 #import "Hero.h"
 #import "Enemy.h"
 
-@interface GameViewController ()
-@property (nonatomic, strong) GameView *gameView;
+@interface PuzzleViewController ()
+@property (nonatomic, strong) PuzzleView *gameView;
 
 @property (nonatomic, strong) Hero *hero;
 @property (nonatomic, strong) Enemy *enemy;
 @property (nonatomic, strong) Level *level;
-@property (nonatomic, strong) GameScene *scene;
+@property (nonatomic, strong) PuzzleScene *scene;
 @property (nonatomic, assign) NSUInteger score;
 @property (nonatomic, assign) NSUInteger moves;
 
@@ -33,26 +33,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
 @end
 
-@implementation SKScene (Unarchive)
-
-+ (instancetype)unarchiveFromFile:(NSString *)file {
-    /* Retrieve scene file path from the application bundle */
-    NSString *nodePath = [[NSBundle mainBundle] pathForResource:file ofType:@"sks"];
-    /* Unarchive the file to an SKScene object */
-    NSData *data = [NSData dataWithContentsOfFile:nodePath
-                                          options:NSDataReadingMappedIfSafe
-                                            error:nil];
-    NSKeyedUnarchiver *arch = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    [arch setClass:self forClassName:@"SKScene"];
-    SKScene *scene = [arch decodeObjectForKey:NSKeyedArchiveRootObjectKey];
-    [arch finishDecoding];
-    
-    return scene;
-}
-
-@end
-
-@implementation GameViewController
+@implementation PuzzleViewController
 
 - (instancetype)init {
     self = [super init];
@@ -64,7 +45,7 @@
 }
 
 - (void)loadView {
-    self.gameView = [[GameView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.gameView = [[PuzzleView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view = self.gameView;
 }
 
@@ -74,11 +55,11 @@
     [self.gameView.shuffleButton addTarget:self action:@selector(shuffleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     // Configure the view.
-    SKView *skView = ((GameView *)self.view).skView;
+    SKView *skView = ((PuzzleView *)self.view).skView;
     skView.multipleTouchEnabled = NO;
     
     // Create and configure scene
-    self.scene = [GameScene sceneWithSize:skView.bounds.size];
+    self.scene = [PuzzleScene sceneWithSize:skView.bounds.size];
     self.scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Load level
@@ -94,7 +75,6 @@
         if ([self.level isPossibleSwap:swap]) {
             [self.level performSwap:swap];
             [self.scene animateSwap:swap completion:^{
-//                self.view.userInteractionEnabled = YES;
                 [self handleMatches];
             }];
             
@@ -141,27 +121,7 @@
 - (void)incrementMoves {
     self.moves += 1;
     
-//    if (self.enemy)
-//        [self.enemy decrementAttackTurn];
-    
-//    if (self.enemy && self.enemy.currentHp <= 0) {
-//        NSLog(@"Hero killed enemy! Gained %lu xp.", [self.enemy xp]);
-//        
-//        [self.hero awardXp:[self.enemy xp]];
-//        
-//        // generate new enemy
-//        self.enemy = [[Enemy alloc] init];
-//    }
-    
     [self updateLabels];
-    
-//    if (self.enemy && self.enemy.currentAttackTurns == 0) {
-//        [self.hero takeDamage:self.enemy.attack];
-//        [self.enemy refreshAttackTurns];
-//        [self updateLabels];
-//        
-//        NSLog(@"Enemy attacks Hero for %ld damage!", self.enemy.attack);
-//    }
     
     if (self.hero.currentHp <= 0) {
         self.gameOverLabel.text = @"You Died!";
