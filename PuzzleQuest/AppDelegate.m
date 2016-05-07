@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "PuzzleViewController.h"
+//#import "PuzzleViewController.h"
+#import "GameViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +21,11 @@
     // Override point for customization after application launch.
     
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [window setRootViewController:[[PuzzleViewController alloc] init]];
+//    [window setRootViewController:[[PuzzleViewController alloc] init]];
+    
+    GameViewController *gameViewController = [[GameViewController alloc] init];
+    
+    [window setRootViewController:gameViewController];
     [window makeKeyAndVisible];
     [self setWindow:window];
     

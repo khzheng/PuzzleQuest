@@ -22,6 +22,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor blueColor];
         _skView = [[SKView alloc] initWithFrame:frame];
         [self addSubview:_skView];
         

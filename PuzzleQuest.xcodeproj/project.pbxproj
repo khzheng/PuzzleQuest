@@ -12,6 +12,10 @@
 		EB271F471C961A9600E70512 /* PuzzleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB271F461C961A9600E70512 /* PuzzleView.m */; };
 		EB271F4A1C961F8500E70512 /* HealthBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EB271F491C961F8500E70512 /* HealthBar.m */; };
 		EB523E9A1C385CCF00EB573C /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = EB523E991C385CCF00EB573C /* Enemy.m */; };
+		EB730FE31CDE89A3008B7CA0 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FE21CDE89A3008B7CA0 /* GameViewController.m */; };
+		EB730FE61CDE89E6008B7CA0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FE51CDE89E6008B7CA0 /* GameView.m */; };
+		EB730FE91CDE8F09008B7CA0 /* Puzzle2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FE81CDE8F09008B7CA0 /* Puzzle2ViewController.m */; };
+		EB730FEC1CDE8F23008B7CA0 /* Puzzle2View.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FEB1CDE8F23008B7CA0 /* Puzzle2View.m */; };
 		EBFF547F1B390B59006972D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF547E1B390B59006972D7 /* main.m */; };
 		EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54811B390B59006972D7 /* AppDelegate.m */; };
 		EBFF54851B390B59006972D7 /* PuzzleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54841B390B59006972D7 /* PuzzleScene.m */; };
@@ -47,6 +51,14 @@
 		EB271F491C961F8500E70512 /* HealthBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthBar.m; sourceTree = "<group>"; };
 		EB523E981C385CCF00EB573C /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
 		EB523E991C385CCF00EB573C /* Enemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enemy.m; sourceTree = "<group>"; };
+		EB730FE11CDE89A3008B7CA0 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		EB730FE21CDE89A3008B7CA0 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		EB730FE41CDE89E6008B7CA0 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
+		EB730FE51CDE89E6008B7CA0 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		EB730FE71CDE8F09008B7CA0 /* Puzzle2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Puzzle2ViewController.h; sourceTree = "<group>"; };
+		EB730FE81CDE8F09008B7CA0 /* Puzzle2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Puzzle2ViewController.m; sourceTree = "<group>"; };
+		EB730FEA1CDE8F23008B7CA0 /* Puzzle2View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Puzzle2View.h; sourceTree = "<group>"; };
+		EB730FEB1CDE8F23008B7CA0 /* Puzzle2View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Puzzle2View.m; sourceTree = "<group>"; };
 		EBFF54791B390B59006972D7 /* PuzzleQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFF547D1B390B59006972D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFF547E1B390B59006972D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -139,6 +151,14 @@
 				EB523E991C385CCF00EB573C /* Enemy.m */,
 				EB271F481C961F8500E70512 /* HealthBar.h */,
 				EB271F491C961F8500E70512 /* HealthBar.m */,
+				EB730FE11CDE89A3008B7CA0 /* GameViewController.h */,
+				EB730FE21CDE89A3008B7CA0 /* GameViewController.m */,
+				EB730FE41CDE89E6008B7CA0 /* GameView.h */,
+				EB730FE51CDE89E6008B7CA0 /* GameView.m */,
+				EB730FE71CDE8F09008B7CA0 /* Puzzle2ViewController.h */,
+				EB730FE81CDE8F09008B7CA0 /* Puzzle2ViewController.m */,
+				EB730FEA1CDE8F23008B7CA0 /* Puzzle2View.h */,
+				EB730FEB1CDE8F23008B7CA0 /* Puzzle2View.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -270,17 +290,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB730FEC1CDE8F23008B7CA0 /* Puzzle2View.m in Sources */,
 				EBFF54B21B3912B6006972D7 /* Level.m in Sources */,
 				EB271F4A1C961F8500E70512 /* HealthBar.m in Sources */,
+				EB730FE31CDE89A3008B7CA0 /* GameViewController.m in Sources */,
 				EBFF548A1B390B59006972D7 /* PuzzleViewController.m in Sources */,
 				EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */,
 				EBFF54851B390B59006972D7 /* PuzzleScene.m in Sources */,
+				EB730FE61CDE89E6008B7CA0 /* GameView.m in Sources */,
 				EBFF54B81B3A4869006972D7 /* Swap.m in Sources */,
 				EB12CC301C384BDD0056EF72 /* Hero.m in Sources */,
 				EB271F471C961A9600E70512 /* PuzzleView.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
 				EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */,
 				EBFF54B51B391928006972D7 /* Tile.m in Sources */,
+				EB730FE91CDE8F09008B7CA0 /* Puzzle2ViewController.m in Sources */,
 				EB523E9A1C385CCF00EB573C /* Enemy.m in Sources */,
 				EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */,
 			);
