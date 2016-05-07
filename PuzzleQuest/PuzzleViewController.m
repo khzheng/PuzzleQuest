@@ -16,7 +16,7 @@
 #import "Enemy.h"
 
 @interface PuzzleViewController ()
-@property (nonatomic, strong) PuzzleView *gameView;
+@property (nonatomic, strong) PuzzleView *puzzleView;
 
 @property (nonatomic, strong) Hero *hero;
 @property (nonatomic, strong) Enemy *enemy;
@@ -35,24 +35,15 @@
 
 @implementation PuzzleViewController
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        
-    }
-    
-    return self;
-}
-
 - (void)loadView {
-    self.gameView = [[PuzzleView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.view = self.gameView;
+    self.puzzleView = [[PuzzleView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.view = self.puzzleView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.gameView.shuffleButton addTarget:self action:@selector(shuffleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.puzzleView.shuffleButton addTarget:self action:@selector(shuffleButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     // Configure the view.
     SKView *skView = ((PuzzleView *)self.view).skView;
@@ -131,8 +122,8 @@
 
 - (void)updateLabels {
     double heroHpPercentage = self.hero.currentHp / (double)self.hero.maxHp;
-    self.gameView.hpBar.percentage = heroHpPercentage;
-    self.gameView.hpBar.displayString = [NSString stringWithFormat:@"%ld/%ld", self.hero.currentHp, self.hero.maxHp];
+    self.puzzleView.hpBar.percentage = heroHpPercentage;
+    self.puzzleView.hpBar.displayString = [NSString stringWithFormat:@"%ld/%ld", self.hero.currentHp, self.hero.maxHp];
     
     self.heroHpLabel.text = [NSString stringWithFormat:@"%ld", (long) self.hero.currentHp];
     self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long) self.enemy.currentAttackTurns];

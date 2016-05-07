@@ -32,14 +32,14 @@ static const CGFloat TileHeight = 36.0;
     if (self) {
         self.anchorPoint = CGPointMake(0.5, 0.5);
         
-        SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
-        [self addChild:background];
+//        SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
+//        [self addChild:background];
         
         self.gameLayer = [SKNode node];
         [self addChild:self.gameLayer];
         
         // align to bottom
-        CGPoint layerPosition = CGPointMake(-TileWidth * NumColumns / 2, -size.height / 2);
+        CGPoint layerPosition = CGPointMake(-TileWidth * NumColumns / 2, -TileWidth * NumColumns / 2);
         
         self.tilesLayer = [SKNode node];
         self.tilesLayer.position = layerPosition;

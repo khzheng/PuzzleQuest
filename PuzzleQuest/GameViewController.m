@@ -8,13 +8,12 @@
 
 #import "GameViewController.h"
 #import "GameView.h"
-//#import "PuzzleViewController.h"
-#import "Puzzle2ViewController.h"
+#import "PuzzleViewController.h"
 
 @interface GameViewController ()
 @property (nonatomic, strong) GameView *gameView;
 
-@property (nonatomic, strong) Puzzle2ViewController *puzzleViewController;
+@property (nonatomic, strong) PuzzleViewController *puzzleViewController;
 @end
 
 @implementation GameViewController
@@ -22,7 +21,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _puzzleViewController = [[Puzzle2ViewController alloc] init];
+        _puzzleViewController = [[PuzzleViewController alloc] init];
     }
     
     return self;
@@ -33,7 +32,10 @@
     
     self.gameView = [[GameView alloc] initWithFrame:bounds];
     
-    self.puzzleViewController.view.frame = CGRectMake(0, bounds.size.height/2, bounds.size.width, bounds.size.height/2);
+    self.puzzleViewController.view.frame = CGRectMake(0,
+                                                      bounds.size.height - bounds.size.width,
+                                                      bounds.size.width,
+                                                      bounds.size.width);
     
     [self.gameView addSubview:self.puzzleViewController.view];
     
@@ -42,7 +44,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+//    [self.puzzleViewController begin];
 }
 
 - (void)didReceiveMemoryWarning {

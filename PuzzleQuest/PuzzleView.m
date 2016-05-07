@@ -34,12 +34,12 @@
         
         _hpBar = [[HealthBar alloc] initWithFrame:CGRectMake(0, 0, 54, 76)];
         _hpBar.barColor = [UIColor redColor];
-        [self addSubview:_hpBar];
+//        [self addSubview:_hpBar];
         
         _shuffleButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_shuffleButton setTitle:@"Shuffle" forState:UIControlStateNormal];
         [_shuffleButton sizeToFit];
-        [self addSubview:_shuffleButton];
+//        [self addSubview:_shuffleButton];
     }
     
     return self;
