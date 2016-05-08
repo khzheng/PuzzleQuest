@@ -14,6 +14,9 @@
 		EB523E9A1C385CCF00EB573C /* Enemy.m in Sources */ = {isa = PBXBuildFile; fileRef = EB523E991C385CCF00EB573C /* Enemy.m */; };
 		EB730FE31CDE89A3008B7CA0 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FE21CDE89A3008B7CA0 /* GameViewController.m */; };
 		EB730FE61CDE89E6008B7CA0 /* GameView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FE51CDE89E6008B7CA0 /* GameView.m */; };
+		EB730FF21CDF05C5008B7CA0 /* BattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FF11CDF05C5008B7CA0 /* BattleViewController.m */; };
+		EB730FF51CDF05D4008B7CA0 /* BattleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FF41CDF05D4008B7CA0 /* BattleView.m */; };
+		EB730FF81CDF05E9008B7CA0 /* BattleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EB730FF71CDF05E9008B7CA0 /* BattleScene.m */; };
 		EBFF547F1B390B59006972D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF547E1B390B59006972D7 /* main.m */; };
 		EBFF54821B390B59006972D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54811B390B59006972D7 /* AppDelegate.m */; };
 		EBFF54851B390B59006972D7 /* PuzzleScene.m in Sources */ = {isa = PBXBuildFile; fileRef = EBFF54841B390B59006972D7 /* PuzzleScene.m */; };
@@ -53,6 +56,12 @@
 		EB730FE21CDE89A3008B7CA0 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		EB730FE41CDE89E6008B7CA0 /* GameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameView.h; sourceTree = "<group>"; };
 		EB730FE51CDE89E6008B7CA0 /* GameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameView.m; sourceTree = "<group>"; };
+		EB730FF01CDF05C5008B7CA0 /* BattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleViewController.h; sourceTree = "<group>"; };
+		EB730FF11CDF05C5008B7CA0 /* BattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleViewController.m; sourceTree = "<group>"; };
+		EB730FF31CDF05D4008B7CA0 /* BattleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleView.h; sourceTree = "<group>"; };
+		EB730FF41CDF05D4008B7CA0 /* BattleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleView.m; sourceTree = "<group>"; };
+		EB730FF61CDF05E9008B7CA0 /* BattleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleScene.h; sourceTree = "<group>"; };
+		EB730FF71CDF05E9008B7CA0 /* BattleScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleScene.m; sourceTree = "<group>"; };
 		EBFF54791B390B59006972D7 /* PuzzleQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuzzleQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBFF547D1B390B59006972D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBFF547E1B390B59006972D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -149,6 +158,12 @@
 				EB730FE21CDE89A3008B7CA0 /* GameViewController.m */,
 				EB730FE41CDE89E6008B7CA0 /* GameView.h */,
 				EB730FE51CDE89E6008B7CA0 /* GameView.m */,
+				EB730FF01CDF05C5008B7CA0 /* BattleViewController.h */,
+				EB730FF11CDF05C5008B7CA0 /* BattleViewController.m */,
+				EB730FF31CDF05D4008B7CA0 /* BattleView.h */,
+				EB730FF41CDF05D4008B7CA0 /* BattleView.m */,
+				EB730FF61CDF05E9008B7CA0 /* BattleScene.h */,
+				EB730FF71CDF05E9008B7CA0 /* BattleScene.m */,
 			);
 			path = PuzzleQuest;
 			sourceTree = "<group>";
@@ -289,9 +304,12 @@
 				EB730FE61CDE89E6008B7CA0 /* GameView.m in Sources */,
 				EBFF54B81B3A4869006972D7 /* Swap.m in Sources */,
 				EB12CC301C384BDD0056EF72 /* Hero.m in Sources */,
+				EB730FF51CDF05D4008B7CA0 /* BattleView.m in Sources */,
 				EB271F471C961A9600E70512 /* PuzzleView.m in Sources */,
 				EBFF547F1B390B59006972D7 /* main.m in Sources */,
+				EB730FF81CDF05E9008B7CA0 /* BattleScene.m in Sources */,
 				EB021BF91B3CD8F9005ADF09 /* Chain.m in Sources */,
+				EB730FF21CDF05C5008B7CA0 /* BattleViewController.m in Sources */,
 				EBFF54B51B391928006972D7 /* Tile.m in Sources */,
 				EB523E9A1C385CCF00EB573C /* Enemy.m in Sources */,
 				EBFF54AF1B3911E5006972D7 /* Cookie.m in Sources */,

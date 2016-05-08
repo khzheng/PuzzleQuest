@@ -9,11 +9,13 @@
 #import "GameViewController.h"
 #import "GameView.h"
 #import "PuzzleViewController.h"
+#import "BattleViewController.h"
 
 @interface GameViewController ()
 @property (nonatomic, strong) GameView *gameView;
 
 @property (nonatomic, strong) PuzzleViewController *puzzleViewController;
+@property (nonatomic, strong) BattleViewController *battleViewController;
 @end
 
 @implementation GameViewController
@@ -21,7 +23,9 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        
         _puzzleViewController = [[PuzzleViewController alloc] init];
+        _battleViewController = [[BattleViewController alloc] init];
     }
     
     return self;
@@ -37,7 +41,13 @@
                                                       bounds.size.width,
                                                       bounds.size.width);
     
+    self.battleViewController.view.frame = CGRectMake(0,
+                                                      0,
+                                                      bounds.size.width,
+                                                      bounds.size.height - bounds.size.width);
+    
     [self.gameView addSubview:self.puzzleViewController.view];
+    [self.gameView addSubview:self.battleViewController.view];
     
     self.view = self.gameView;
 }
