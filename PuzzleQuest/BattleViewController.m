@@ -34,6 +34,7 @@
     [skView presentScene:self.battleScene];
     
     [self.battleScene loadHero];
+    [self.battleScene loadNextEnemy];
 }
 
 - (void)didReceiveMemoryWarning {

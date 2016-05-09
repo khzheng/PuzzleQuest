@@ -11,5 +11,6 @@
 @interface BattleScene : SKScene
 
 - (void)loadHero;
+- (void)loadNextEnemy;
 
 @end
