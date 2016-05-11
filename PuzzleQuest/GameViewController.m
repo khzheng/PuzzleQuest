@@ -8,7 +8,6 @@
 
 #import "GameViewController.h"
 #import "GameView.h"
-#import "PuzzleViewController.h"
 #import "BattleViewController.h"
 
 @interface GameViewController ()
@@ -55,12 +54,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.puzzleViewController begin];
+    self.puzzleViewController.delegate = self;
+    [self.puzzleViewController beginGame];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - PuzzleViewControllerDelegate
+
+- (void)puzzleViewController:(PuzzleViewController *)puzzleViewController
+               matchedSwords:(NSInteger)swords
+                     shields:(NSInteger)shields
+                      hearts:(NSInteger)hearts
+                       coins:(NSInteger)coins {
+    NSLog(@"matched swords: %ld shields: %ld, hearts: %ld, coins: %ld", swords, shields, hearts, coins);
 }
 
 /*

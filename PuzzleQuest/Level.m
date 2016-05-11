@@ -512,7 +512,7 @@
 
 - (void)calculateScores:(NSSet *)chains {
     for (Chain *chain in chains)
-        chain.score = [chain.cookies count] - 2;
+        chain.score = [chain.cookies count];
 }
 
 - (Cookie *)targetEnemyCookie {

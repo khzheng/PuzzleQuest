@@ -89,7 +89,7 @@
     self.enemy = nil;
     
     // start game!
-    [self beginGame];
+//    [self beginGame];
 
 //    // Configure the view.
 //    SKView * skView = (SKView *)self.view;
@@ -169,9 +169,22 @@
 }
 
 - (void)handleMatches {
+    static NSInteger swordsMatched = 0;
+    static NSInteger shieldsMatched = 0;
+    static NSInteger coinsMatched = 0;
+    static NSInteger heartsMatched = 0;
+    
     NSSet *chains = [self.level removeMatches];
     
     if ([chains count] == 0) {
+        [self.delegate puzzleViewController:self
+                              matchedSwords:swordsMatched
+                                    shields:shieldsMatched
+                                     hearts:heartsMatched
+                                      coins:coinsMatched];
+        
+        swordsMatched = shieldsMatched = coinsMatched = heartsMatched = 0;
+        
         [self.level.movedCookies removeAllObjects];
         [self beginNextTurn];
         return;
@@ -180,29 +193,23 @@
     [self.scene animateMatchedCookies:chains completion:^{
         NSUInteger score = 0;
         
-        // tally points (swords, shields, health, and gold)
-        NSInteger attack = 0;
-        NSInteger shield = 0;
-        NSInteger health = 0;
-        NSInteger gold = 0;
-        NSInteger skull = 0;
+        // tally points (swords, shields, hearts, and coins)
+
         for (Chain *chain in chains) {
             CookieType type = [chain cookieType];
             switch (type) {
                 case SwordType:
-                    attack += chain.score;
+                    swordsMatched += chain.score;
                     break;
                 case ShieldType:
-                    shield += chain.score;
+                    shieldsMatched += chain.score;
                     break;
                 case HeartType:
-                    health += chain.score;
+                    heartsMatched += chain.score;
                     break;
                 case GoldType:
-                    gold += chain.score;
+                    coinsMatched += chain.score;
                     break;
-                case SkullType:
-                    skull += chain.score;
                 default:
                     break;
             }
@@ -211,38 +218,34 @@
             score += chain.score;
         }
         
-        // apply points
-        if (attack > 0) {
-//            if (self.enemy) {
-//                [self.enemy takeDamage:attack];
-//                NSLog(@"Hero attacks enemy for %ld damage!", attack);
-//            }
-        }
-        if (shield > 0) {
-            
-        }
-        if (health > 0) {
-            NSInteger healAmount = [self.hero heal:health];
-            if (healAmount > 0)
-                NSLog(@"Hero heals for %ld health!", healAmount);
-        }
-        if (gold < 0) {
-            
-        }
-        if (skull > 0) {
-            [self.hero takeDamage:skull];
-            NSLog(@"Hero takes %ld damage!", skull);
-        }
+//        // apply points
+//        if (attack > 0) {
+////            if (self.enemy) {
+////                [self.enemy takeDamage:attack];
+////                NSLog(@"Hero attacks enemy for %ld damage!", attack);
+////            }
+//        }
+//        if (shield > 0) {
+//            
+//        }
+//        if (health > 0) {
+//            NSInteger healAmount = [self.hero heal:health];
+//            if (healAmount > 0)
+//                NSLog(@"Hero heals for %ld health!", healAmount);
+//        }
+//        if (gold < 0) {
+//            
+//        }
+//        if (skull > 0) {
+//            [self.hero takeDamage:skull];
+//            NSLog(@"Hero takes %ld damage!", skull);
+//        }
         
         [self updateLabels];
         
         NSArray *columns = [self.level fillHoles];
         [self.scene animateFallingCookies:columns completion:^{
             NSArray *columns = [self.level topUpCookies];
-            
-//            [self.level detectEnemyCookies];
-            
-            // TODO: create enemies for each created enemy
             
             [self.scene animateNewCookies:columns completion:^{
                 [self handleMatches];
