@@ -9,12 +9,15 @@
 #import "GameViewController.h"
 #import "GameView.h"
 #import "BattleViewController.h"
+#import "Hero.h"
 
 @interface GameViewController ()
 @property (nonatomic, strong) GameView *gameView;
 
 @property (nonatomic, strong) PuzzleViewController *puzzleViewController;
 @property (nonatomic, strong) BattleViewController *battleViewController;
+
+@property (nonatomic, strong) Hero *hero;
 @end
 
 @implementation GameViewController
@@ -54,6 +57,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.hero = [[Hero alloc] init];
+    
     self.puzzleViewController.delegate = self;
     [self.puzzleViewController beginGame];
 }
@@ -71,6 +76,17 @@
                       hearts:(NSInteger)hearts
                        coins:(NSInteger)coins {
     NSLog(@"matched swords: %ld shields: %ld, hearts: %ld, coins: %ld", swords, shields, hearts, coins);
+    
+    if (swords > 0) {
+        [self.hero gainAttMeter:swords];
+        
+//        NSLog(@"hero ATT Meter %d/%d", self.hero.currentAttMeter, self.hero.maxAttMeter);
+        
+        if (self.hero.currentAttMeter >= self.hero.maxAttMeter) {
+            [self.hero consumeAttMeter];
+            NSLog(@"hero attacks!");
+        }
+    }
 }
 
 /*

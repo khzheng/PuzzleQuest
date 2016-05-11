@@ -20,6 +20,8 @@
         _maxHp = _currentHp = INITIAL_HP;
         _attack = INITIAL_ATK;
         _xp = 0;
+        _maxAttMeter = 10;
+        _currentAttMeter = 0;
     }
     
     return self;
@@ -62,6 +64,14 @@
     const float constant = 1.0;
     
     return (NSUInteger)(constant * sqrt(_xp));
+}
+
+- (void)gainAttMeter:(NSInteger)gainedAttMeter {
+    _currentAttMeter += gainedAttMeter;
+}
+
+- (void)consumeAttMeter {
+    _currentAttMeter = 0;
 }
 
 - (NSString *)description {
