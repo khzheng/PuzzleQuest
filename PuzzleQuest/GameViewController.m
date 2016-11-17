@@ -84,7 +84,7 @@
         
         if (self.hero.currentAttMeter >= self.hero.maxAttMeter) {
             [self.hero consumeAttMeter];
-            NSLog(@"hero attacks!");
+            [self.battleViewController heroAttackEnemy];
         }
     }
 }

@@ -42,6 +42,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)heroAttackEnemy {
+    [self.battleScene heroAttackEnemy];
+}
+
 /*
 #pragma mark - Navigation
 

@@ -10,4 +10,6 @@
 
 @interface BattleViewController : UIViewController
 
+- (void)heroAttackEnemy;
+
 @end

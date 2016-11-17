@@ -12,6 +12,8 @@
 @property (nonatomic, strong) SKNode *baseLayer;
 @property (nonatomic, strong) SKNode *heroLayer;
 @property (nonatomic, strong) SKNode *enemyLayer;
+@property (nonatomic, strong) SKSpriteNode *heroSprite;
+@property (nonatomic, strong) SKSpriteNode *enemySprite;
 @end
 
 @implementation BattleScene
@@ -40,13 +42,31 @@
 - (void)loadHero {
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Warrior"];
     sprite.position = CGPointMake(-36, -15);
+    self.heroSprite = sprite;
     [self.heroLayer addChild:sprite];
 }
 
 - (void)loadNextEnemy {
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Zombie"];
     sprite.position = CGPointMake(36, -13);
+    self.enemySprite = sprite;
     [self.enemyLayer addChild:sprite];
+}
+
+- (void)heroAttackEnemy {
+    [self.heroSprite runAction:[SKAction sequence:@[[SKAction moveByX:10 y:0 duration:0.1],
+                                                   [SKAction moveByX:-10 y:0 duration:0.3]]]];
+    [self.enemySprite runAction:[SKAction sequence:@[[SKAction hide],
+                                                     [SKAction waitForDuration:0.3],
+                                                     [SKAction unhide],
+                                                     [SKAction waitForDuration:0.2],
+                                                     [SKAction hide],
+                                                     [SKAction waitForDuration:0.2],
+                                                     [SKAction unhide],
+                                                     [SKAction waitForDuration:0.1],
+                                                     [SKAction hide],
+                                                     [SKAction waitForDuration:0.1],
+                                                     [SKAction unhide]]]];
 }
 
 @end
