@@ -68,10 +68,10 @@
 
 - (NSString *)highlightedSpriteName {
     static NSString * const highlightedSpriteNames[] = {
-        @"Croissant-Highlighted",
-        @"Cupcake-Highlighted",
-        @"Danish-Highlighted",
-        @"Donut-Highlighted",
+        @"Sword-Highlighted",
+        @"Shield-Highlighted",
+        @"Heart-Highlighted",
+        @"Gold-Highlighted",
         @"Macaroon-Highlighted",
         @"SugarCookie-Highlighted",
     };
