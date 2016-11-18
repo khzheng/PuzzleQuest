@@ -12,6 +12,15 @@
     NSMutableArray *_cookies;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _specialCookieIndex = 0;
+    }
+    
+    return self;
+}
+
 - (void)addCookie:(Cookie *)cookie {
     if (_cookies == nil)
         _cookies = [NSMutableArray array];

@@ -247,14 +247,31 @@ static const CGFloat TileHeight = 36.0;
 
 - (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion {
     for (Chain *chain in chains) {
-        for (Cookie *cookie in chain.cookies) {
-            if (cookie.sprite != nil && !cookie.isSpecial) { // same cookie can be part of two chains, but we only want to add one animation to the sprite
-                SKAction *scaleUpAction = [SKAction scaleTo:1.1 duration:0.1];
-                SKAction *scaleAction = [SKAction scaleTo:0.1 duration:0.3];
-                scaleAction.timingMode = SKActionTimingEaseOut;
-                [cookie.sprite runAction:[SKAction sequence:@[scaleUpAction, scaleAction, [SKAction removeFromParent]]]];
-                
-                cookie.sprite = nil;    // this is for the comment in the above if
+        if ([chain count] == 3) {
+            for (Cookie *cookie in chain.cookies) {
+                if (cookie.sprite != nil && !cookie.isSpecial) { // same cookie can be part of two chains, but we only want to add one animation to the sprite
+                    SKAction *scaleUpAction = [SKAction scaleTo:1.1 duration:0.1];
+                    SKAction *scaleAction = [SKAction scaleTo:0.1 duration:0.3];
+                    scaleAction.timingMode = SKActionTimingEaseOut;
+                    [cookie.sprite runAction:[SKAction sequence:@[scaleUpAction, scaleAction, [SKAction removeFromParent]]]];
+                    
+                    cookie.sprite = nil;    // this is for the comment in the above if
+                }
+            }
+        } else {    // chain > 3
+            // matched cookies should converge to special cookie
+            Cookie *specialCookie = [[chain cookies] objectAtIndex:chain.specialCookieIndex];
+            if (specialCookie) {
+                CGPoint specialCookieLocation = [self pointForColumn:specialCookie.column row:specialCookie.row];
+                for (Cookie *cookie in chain.cookies) {
+                    if (cookie.sprite != nil && !cookie.isSpecial) {
+                        SKAction *moveAction = [SKAction moveTo:specialCookieLocation duration:0.2];
+                        moveAction.timingMode = SKActionTimingEaseIn;
+                        [cookie.sprite runAction:[SKAction sequence:@[moveAction, [SKAction removeFromParent]]]];
+                        
+                        cookie.sprite = nil;
+                    }
+                }
             }
         }
     }

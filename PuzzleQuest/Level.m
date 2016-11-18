@@ -245,25 +245,31 @@
                     }
                     while (column < NumColumns && _cookies[column][row].cookieType == matchType);
                     
-                    if ([chain count] == 4) {
+                    if ([chain count] >= 4) {
                         // look for special cookies
                         BOOL didFindSpecialCookie = NO;
                         for (Cookie *cookie in chain.cookies) {
                             if ([self.movedCookies containsObject:cookie]) {
                                 cookie.isSpecial = YES;
                                 didFindSpecialCookie = YES;
+                                chain.specialCookieIndex = [[chain cookies] indexOfObject:cookie];
                                 break;
                             }
                         }
                         
                         // can't find it, just make first one special
-                        if (!didFindSpecialCookie)
+                        if (!didFindSpecialCookie) {
                             [chain.cookies[0] setIsSpecial:YES];
-                    } else if ([chain count] >= 5) {
-                        // middle cookie becomes special
-                        Cookie *specialCookie = chain.cookies[2];
-                        specialCookie.isSpecial = YES;
+                            chain.specialCookieIndex = 0;
+                        }
                     }
+//                    else if ([chain count] >= 5) {
+//                        // TODO: figure out special cookie
+//                        // middle cookie becomes special
+//                        Cookie *specialCookie = chain.cookies[2];
+//                        specialCookie.isSpecial = YES;
+//                        chain.specialCookieIndex = 2;
+//                    }
                     
                     [set addObject:chain];
                     continue;
@@ -303,18 +309,22 @@
                             if ([self.movedCookies containsObject:cookie]) {
                                 cookie.isSpecial = YES;
                                 didFindSpecialCookie = YES;
+                                chain.specialCookieIndex = [[chain cookies] indexOfObject:cookie];
                                 break;
                             }
                         }
                         
                         // can't find it, just make first one special
-                        if (!didFindSpecialCookie)
+                        if (!didFindSpecialCookie) {
                             [chain.cookies[0] setIsSpecial:YES];
-                    } else if ([chain count] >= 5) {
-                        // middle cookie becomes special
-                        Cookie *specialCookie = chain.cookies[2];
-                        specialCookie.isSpecial = YES;
+                            chain.specialCookieIndex = 0;
+                        }
                     }
+//                    else if ([chain count] >= 5) {
+//                        // middle cookie becomes special
+//                        Cookie *specialCookie = chain.cookies[2];
+//                        specialCookie.isSpecial = YES;
+//                    }
                     
                     [set addObject:chain];
                     continue;
@@ -381,10 +391,14 @@
             NSSet *allCookies = [NSSet setWithArray:[chain1.cookies arrayByAddingObjectsFromArray:chain2.cookies]];
             Chain *mergedChain = [[Chain alloc] init];
             mergedChain.chainType = chainType;
+            __block int i = 0;
             [allCookies enumerateObjectsUsingBlock:^(Cookie *cookie, BOOL *stop) {
-                if (intersectingCookie && [cookie isEqualToCookie:intersectingCookie])
+                if (intersectingCookie && [cookie isEqualToCookie:intersectingCookie]) {
                     cookie.isSpecial = YES;
+                    mergedChain.specialCookieIndex = i;
+                }
                 [mergedChain addCookie:cookie];
+                i++;
             }];
             
             // add old chains to remove
