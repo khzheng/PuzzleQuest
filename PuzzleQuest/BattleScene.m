@@ -69,4 +69,10 @@
                                                      [SKAction unhide]]]];
 }
 
+- (void)killEnemy {
+    [self.enemySprite runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:1.0], [SKAction removeFromParent]]] completion:^{
+        [self performSelector:@selector(loadNextEnemy) withObject:nil afterDelay:1.0];
+    }];
+}
+
 @end

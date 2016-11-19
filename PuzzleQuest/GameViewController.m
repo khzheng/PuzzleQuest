@@ -25,9 +25,10 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.hero = [[Hero alloc] init];
         
         _puzzleViewController = [[PuzzleViewController alloc] init];
-        _battleViewController = [[BattleViewController alloc] init];
+        _battleViewController = [[BattleViewController alloc] initWithHero:self.hero];
     }
     
     return self;
@@ -56,8 +57,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.hero = [[Hero alloc] init];
     
     self.puzzleViewController.delegate = self;
     [self.puzzleViewController beginGame];

@@ -14,5 +14,6 @@
 - (void)loadNextEnemy;
 
 - (void)heroAttackEnemy;
+- (void)killEnemy;
 
 @end

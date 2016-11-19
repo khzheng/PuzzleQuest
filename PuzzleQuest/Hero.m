@@ -9,7 +9,7 @@
 #import "Hero.h"
 
 #define INITIAL_HP  30
-#define INITIAL_ATK 1
+#define INITIAL_ATK 5
 
 @implementation Hero
 

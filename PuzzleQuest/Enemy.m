@@ -34,8 +34,10 @@
     _currentAttackTurns = _attackTurns;
 }
 
-- (void)takeDamage:(NSInteger)damage {
+- (BOOL)takeDamage:(NSInteger)damage {
     _currentHp -= damage;
+    
+    return _currentHp <= 0;
 }
 
 @end

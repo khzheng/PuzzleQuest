@@ -9,13 +9,24 @@
 #import "BattleViewController.h"
 #import "BattleView.h"
 #import "BattleScene.h"
+#import "Enemy.h"
 
 @interface BattleViewController ()
 @property (nonatomic, strong) BattleView *battleView;
 @property (nonatomic, strong) BattleScene *battleScene;
+@property (nonatomic, strong) Enemy *currentEnemy;
 @end
 
 @implementation BattleViewController
+
+- (instancetype)initWithHero:(Hero *)hero {
+    self = [super init];
+    if (self) {
+        _hero = hero;
+    }
+    
+    return self;
+}
 
 - (void)loadView {
     self.battleView = [[BattleView alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
@@ -34,16 +45,32 @@
     [skView presentScene:self.battleScene];
     
     [self.battleScene loadHero];
+    
+    self.currentEnemy = [self createNextEnemy];
     [self.battleScene loadNextEnemy];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//    // Dispose of any resources that can be recreated.
+//}
+
+- (Enemy *)createNextEnemy {
+    return [[Enemy alloc] init];
 }
 
 - (void)heroAttackEnemy {
+    BOOL didKill = [self.currentEnemy takeDamage:self.hero.attack];
+    
     [self.battleScene heroAttackEnemy];
+    
+    if (didKill) {
+        NSLog(@"Enemy killed!");
+        
+        [self.battleScene killEnemy];
+        
+        self.currentEnemy = [self createNextEnemy];
+    }
 }
 
 /*

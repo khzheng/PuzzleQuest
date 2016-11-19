@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Hero.h"
 
 @interface BattleViewController : UIViewController
 
+@property (nonatomic, strong) Hero *hero;
+
+- (instancetype)initWithHero:(Hero *)hero;
 - (void)heroAttackEnemy;
 
 @end

@@ -19,6 +19,6 @@
 
 - (void)decrementAttackTurn;
 - (void)refreshAttackTurns;
-- (void)takeDamage:(NSInteger)damage;
+- (BOOL)takeDamage:(NSInteger)damage; // returns if kill
 
 @end
