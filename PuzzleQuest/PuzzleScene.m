@@ -265,9 +265,10 @@ static const CGFloat TileHeight = 36.0;
                 CGPoint specialCookieLocation = [self pointForColumn:specialCookie.column row:specialCookie.row];
                 for (Cookie *cookie in chain.cookies) {
                     if (cookie.sprite != nil && !cookie.isSpecial) {
-                        SKAction *moveAction = [SKAction moveTo:specialCookieLocation duration:0.2];
+                        SKAction *scaleAction = [SKAction scaleTo:1.1 duration:0.1];
+                        SKAction *moveAction = [SKAction moveTo:specialCookieLocation duration:0.15];
                         moveAction.timingMode = SKActionTimingEaseIn;
-                        [cookie.sprite runAction:[SKAction sequence:@[moveAction, [SKAction removeFromParent]]]];
+                        [cookie.sprite runAction:[SKAction sequence:@[scaleAction, moveAction, [SKAction removeFromParent]]]];
                         
                         cookie.sprite = nil;
                     }
