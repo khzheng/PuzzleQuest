@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-//#import "PuzzleViewController.h"
-#import "GameViewController.h"
+#import "DungeonsViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,15 +20,24 @@
     // Override point for customization after application launch.
     
     UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    [window setRootViewController:[[PuzzleViewController alloc] init]];
     
-    GameViewController *gameViewController = [[GameViewController alloc] init];
+    // create tab view controllers
     
-    [window setRootViewController:gameViewController];
+    DungeonsViewController *dungeonsViewController = [[DungeonsViewController alloc] init];
+    dungeonsViewController.title = @"Dungeons";
+    UINavigationController *nc1 = [[UINavigationController alloc] initWithRootViewController:dungeonsViewController];
+    nc1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Dungeons" image:nil tag:0];
+    
+    UIViewController *vc2 = [[UIViewController alloc] init];
+    vc2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"2" image:nil tag:1];
+    
+    // create tab view
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[nc1, vc2];
+    
+    window.rootViewController = tabBarController;
     [window makeKeyAndVisible];
     [self setWindow:window];
-    
-    return YES;
     
     return YES;
 }
