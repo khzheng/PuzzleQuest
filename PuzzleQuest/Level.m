@@ -302,7 +302,7 @@
                     }
                     while (row < NumRows && _cookies[column][row].cookieType == matchType);
                     
-                    if ([chain count] == 4) {
+                    if ([chain count] >= 4) {
                         // look for special cookies
                         BOOL didFindSpecialCookie = NO;
                         for (Cookie *cookie in chain.cookies) {
