@@ -258,10 +258,6 @@
     [self.level detectPossibleSwaps];
     
     [self.level detectEnemyCookies];
-    Cookie *targetEnemyCookie = [self.level targetEnemyCookie];
-    if (targetEnemyCookie) {
-        [self.scene showTargetIndicatorForCookie:targetEnemyCookie];
-    }
     
     self.view.userInteractionEnabled = YES;
     

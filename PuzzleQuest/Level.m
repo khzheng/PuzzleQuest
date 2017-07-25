@@ -26,7 +26,6 @@
     self = [super init];
     if (self) {
         _movedCookies = [[NSMutableSet alloc] init];
-        _targetEnemyCookie = nil;
         
         // create tiles
         for (NSInteger row = 0; row < NumRows; row++)
@@ -493,11 +492,13 @@
             if (_tiles[column][row] != nil) {
                 
                 // create new cookie type, try to mix it up
+                // limit to 1 enemy for now
+                
                 NSUInteger newCookieType;
                 do {
                     // +1 for skull generation
-                    newCookieType = arc4random_uniform(NumberCookieTypes) + 1;
-                } while (newCookieType == cookieType);
+                    newCookieType = arc4random_uniform(NumberCookieTypes + 1) + 1;
+                } while (newCookieType == cookieType || (newCookieType == SkullType && [self.enemyCookies count] >= 1));
                 cookieType = newCookieType;
                 
                 Cookie *cookie = [self createCookitAtColumn:column row:row withType:cookieType];
@@ -519,21 +520,12 @@
         for (Cookie *cookie in chain.cookies)
             if (!cookie.isSpecial) {
                 _cookies[cookie.column][cookie.row] = nil;
-                if ([cookie isEqualToCookie:_targetEnemyCookie])
-                    _targetEnemyCookie = nil;
             }
 }
 
 - (void)calculateScores:(NSSet *)chains {
     for (Chain *chain in chains)
         chain.score = [chain.cookies count];
-}
-
-- (Cookie *)targetEnemyCookie {
-    if (_targetEnemyCookie == nil)
-        _targetEnemyCookie = [self.enemyCookies anyObject];
-    
-    return _targetEnemyCookie;
 }
 
 @end

@@ -19,7 +19,6 @@ static const NSInteger NumRows = 9;
 @interface Level : NSObject
 
 @property (nonatomic, strong) NSMutableSet *movedCookies;
-@property (nonatomic, strong) Cookie *targetEnemyCookie;
 
 - (NSSet *)shuffle;
 - (Cookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
