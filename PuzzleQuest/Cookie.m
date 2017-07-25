@@ -54,6 +54,7 @@
         @"Shield",
         @"Heart",
         @"Gold",
+        @"Mana",
         @"Skull",
         @"Croissant",
         @"Cupcake",
@@ -72,6 +73,7 @@
         @"Shield-Highlighted",
         @"Heart-Highlighted",
         @"Gold-Highlighted",
+        @"Mana-HIghlighted",
         @"Macaroon-Highlighted",
         @"SugarCookie-Highlighted",
     };
@@ -85,6 +87,7 @@
         @"Shield",
         @"Heart",
         @"Gold",
+        @"Mana",
         @"Skull",
         @"Croissant-special",
         @"Cupcake-special",

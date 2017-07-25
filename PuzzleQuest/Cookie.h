@@ -15,10 +15,11 @@ typedef NS_ENUM(NSInteger, CookieType) {
     ShieldType,
     HeartType,
     GoldType,
+    ManaType,
     SkullType
 };
 
-static const NSUInteger NumberCookieTypes = 4;
+static const NSUInteger NumberCookieTypes = 5;
 
 @interface Cookie : NSObject
 
