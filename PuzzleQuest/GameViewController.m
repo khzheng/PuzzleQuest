@@ -28,7 +28,7 @@
         self.hero = [[Hero alloc] init];
         
         _puzzleViewController = [[PuzzleViewController alloc] init];
-        _battleViewController = [[BattleViewController alloc] initWithHero:self.hero];
+//        _battleViewController = [[BattleViewController alloc] initWithHero:self.hero];
     }
     
     return self;
@@ -40,7 +40,7 @@
     self.gameView = [[GameView alloc] initWithFrame:bounds];
     
     self.puzzleViewController.view.frame = CGRectMake(0,
-                                                      bounds.size.height - bounds.size.width,
+                                                      bounds.size.height/2.0 - bounds.size.width/2.0,
                                                       bounds.size.width,
                                                       bounds.size.width);
     
