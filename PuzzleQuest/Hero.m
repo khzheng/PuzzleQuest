@@ -8,7 +8,7 @@
 
 #import "Hero.h"
 
-#define INITIAL_HP  30
+#define INITIAL_HP  10
 #define INITIAL_ATK 5
 
 @implementation Hero
@@ -29,6 +29,9 @@
 
 - (void)takeDamage:(NSInteger)damage {
     _currentHp -= damage;
+    
+    NSLog(@"Hero takes %ld damage!", (long)damage);
+    NSLog(@"%@", [self description]);
 }
 
 - (NSInteger)heal:(NSInteger)healAmount {

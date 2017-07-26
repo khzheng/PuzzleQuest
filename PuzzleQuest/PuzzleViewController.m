@@ -83,9 +83,6 @@
     // Present scene
     [skView presentScene:self.scene];
     
-    self.hero = [[Hero alloc] init];
-    NSLog(@"Starting Hero: %@", self.hero);
-    
     self.enemy = nil;
     
     // start game!
@@ -107,6 +104,11 @@
 //    
 //    // Present the scene.
 //    [skView presentScene:scene];
+}
+
+- (void)createHero {
+    self.hero = [[Hero alloc] init];
+    NSLog(@"Starting Hero: %@", self.hero);
 }
 
 - (void)incrementMoves {
@@ -154,7 +156,7 @@
 - (void)beginGame {
     self.score = 0;
     self.moves = 0;
-    [self.hero reset];
+    [self createHero];
     self.enemy = [[Enemy alloc] init];
     [self updateLabels];
     
@@ -259,9 +261,26 @@
     
     [self.level decrementAllEnemyAttackCounters];
     [self.scene animateAttackCountersForCookies:self.level.enemyCookies completion:^{
-        [self incrementMoves];
         
-        self.view.userInteractionEnabled = YES;
+        NSArray *attackingEnemies = [self.level enemiesAttack];
+        if ([attackingEnemies count] > 0) {
+            NSInteger totalAttack = 0;
+            for (Cookie *cookie in attackingEnemies) {
+                totalAttack += cookie.attack;
+            }
+            
+            [self.hero takeDamage:totalAttack];
+            [self.level resetEnemyAttackCounters:attackingEnemies];
+            [self.scene animateAttackCountersForCookies:[NSSet setWithArray:attackingEnemies] completion:^{
+                [self incrementMoves];
+                
+                self.view.userInteractionEnabled = YES;
+            }];
+        } else {
+            [self incrementMoves];
+            
+            self.view.userInteractionEnabled = YES;
+        }
     }];
 }
 

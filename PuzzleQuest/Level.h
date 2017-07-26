@@ -32,5 +32,8 @@ static const NSInteger NumRows = 9;
 - (void)detectPossibleSwaps;
 - (void)detectEnemyCookies;
 - (void)decrementAllEnemyAttackCounters;
+- (NSArray *)enemiesReadyToAttack;
+- (NSArray *)enemiesAttack;
+- (void)resetEnemyAttackCounters:(NSArray *)enemies;
 
 @end

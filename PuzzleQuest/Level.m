@@ -47,6 +47,8 @@
 //        NSLog(@"possible swaps: %@", self.possibleSwaps);
     } while ([self.possibleSwaps count] == 0);
     
+    [self.enemyCookies removeAllObjects];
+    
 //    for (NSInteger column = 0; column < NumColumns; column++) {
 //        NSLog(@"cookie(%lu, 0) type: %lu, exists? %d", (long)column, (unsigned long)_cookies[column][0].cookieType, _cookies[column][0] != nil);
 //    }
@@ -221,6 +223,33 @@
 - (void)decrementAllEnemyAttackCounters {
     for (Cookie *cookie in self.enemyCookies) {
         [cookie decrementAttackTurnsCounter];
+    }
+}
+
+- (NSArray *)enemiesReadyToAttack {
+    NSMutableArray *enemiesReadyToAttack = [NSMutableArray array];
+    for (Cookie *cookie in self.enemyCookies) {
+        if (cookie.attackTurnsCounter == 0)
+            [enemiesReadyToAttack addObject:cookie];
+    }
+    
+    return [NSArray arrayWithArray:enemiesReadyToAttack];
+}
+
+- (NSArray *)enemiesAttack {
+    NSArray *attackingEnemies = [self enemiesReadyToAttack];
+    
+    // reset attack turn counter
+//    for (Cookie *cookie in attackingEnemies) {
+//        cookie.attackTurnsCounter = cookie.attackTurns;
+//    }
+    
+    return attackingEnemies;
+}
+
+- (void)resetEnemyAttackCounters:(NSArray *)enemies {
+    for (Cookie *cookie in enemies) {
+        cookie.attackTurnsCounter = cookie.attackTurns;
     }
 }
 
@@ -516,7 +545,7 @@
                 do {
                     // +1 for skull generation
                     newCookieType = arc4random_uniform(NumberCookieTypes + 1) + 1;
-                } while (newCookieType == cookieType || (newCookieType == SkullType && [self.enemyCookies count] >= 1));
+                } while (newCookieType == cookieType || (newCookieType == SkullType && [self.enemyCookies count] >= 5));
                 cookieType = newCookieType;
                 
                 Cookie *cookie = [self createCookitAtColumn:column row:row withType:cookieType];
