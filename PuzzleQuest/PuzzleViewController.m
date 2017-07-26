@@ -257,11 +257,12 @@
 - (void)beginNextTurn {
     [self.level detectPossibleSwaps];
     
-    [self.level detectEnemyCookies];
-    
-    self.view.userInteractionEnabled = YES;
-    
-    [self incrementMoves];
+    [self.level decrementAllEnemyAttackCounters];
+    [self.scene animateAttackCountersForCookies:self.level.enemyCookies completion:^{
+        [self incrementMoves];
+        
+        self.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (void)showGameOver {

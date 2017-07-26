@@ -14,7 +14,7 @@
 
 @interface Level ()
 @property (nonatomic, strong) NSSet *possibleSwaps;
-@property (nonatomic, strong) NSSet *enemyCookies;
+@property (nonatomic, strong) NSMutableSet *enemyCookies;
 @end
 
 @implementation Level {
@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         _movedCookies = [[NSMutableSet alloc] init];
+        _enemyCookies = [[NSMutableSet alloc] init];
         
         // create tiles
         for (NSInteger row = 0; row < NumRows; row++)
@@ -126,6 +127,17 @@
     cookie.row = row;
     cookie.column = column;
     cookie.isSpecial = NO;
+    cookie.maxHp = cookie.currentHp = 1;
+    cookie.attack = cookie.attackTurns = 0;
+    
+    if (cookieType == SkullType) {
+        cookie.maxHp = cookie.currentHp = 5;
+        cookie.attack = 1;
+        cookie.attackTurns = cookie.attackTurnsCounter = 3;
+        
+        [self.enemyCookies addObject:cookie];
+    }
+    
     _cookies[column][row] = cookie;
     return cookie;
 }
@@ -204,6 +216,12 @@
     }
 
     self.enemyCookies = set;
+}
+
+- (void)decrementAllEnemyAttackCounters {
+    for (Cookie *cookie in self.enemyCookies) {
+        [cookie decrementAttackTurnsCounter];
+    }
 }
 
 // a chain is 3 or more consecutive cookies of the same type in a row or column

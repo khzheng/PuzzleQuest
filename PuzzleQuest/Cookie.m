@@ -8,7 +8,22 @@
 
 #import "Cookie.h"
 
+@interface Cookie()
+
+@property (nonatomic, assign) BOOL shouldDecrementAttackTurnsCounter;
+
+@end
+
 @implementation Cookie
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _shouldDecrementAttackTurnsCounter = NO;
+    }
+    
+    return self;
+}
 
 - (void)setIsSpecial:(BOOL)isSpecial {
     if (_isSpecial == isSpecial)
@@ -46,6 +61,15 @@
     BOOL haveEqualIsSpecial = self.isSpecial == cookie.isSpecial;
     
     return haveEqualColumns && haveEqualRows && haveEqualCookieTypes && haveEqualIsSpecial;
+}
+
+- (void)decrementAttackTurnsCounter {
+    // this check is to prevent decrementing the counter when the enemy first appears
+    if (!_shouldDecrementAttackTurnsCounter) {
+        _shouldDecrementAttackTurnsCounter = YES;
+        return;
+    }
+    _attackTurnsCounter--;
 }
 
 - (NSString *)spriteName {

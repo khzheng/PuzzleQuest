@@ -19,6 +19,7 @@ static const NSInteger NumRows = 9;
 @interface Level : NSObject
 
 @property (nonatomic, strong) NSMutableSet *movedCookies;
+@property (nonatomic, readonly) NSMutableSet *enemyCookies;
 
 - (NSSet *)shuffle;
 - (Cookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
@@ -30,5 +31,6 @@ static const NSInteger NumRows = 9;
 - (NSArray *)topUpCookies;
 - (void)detectPossibleSwaps;
 - (void)detectEnemyCookies;
+- (void)decrementAllEnemyAttackCounters;
 
 @end

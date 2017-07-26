@@ -24,6 +24,7 @@
 - (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion;
 - (void)animateFallingCookies:(NSArray *)columns completion:(dispatch_block_t)completion;
 - (void)animateNewCookies:(NSArray *)columns completion:(dispatch_block_t)completion;
+- (void)animateAttackCountersForCookies:(NSSet *)cookies completion:(dispatch_block_t)completion;
 - (void)showTargetIndicatorForCookie:(Cookie *)cookie;
 - (void)removeAllCookieSprites;
 

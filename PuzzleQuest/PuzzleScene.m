@@ -318,6 +318,16 @@ static const CGFloat TileHeight = 36.0;
         [array enumerateObjectsUsingBlock:^(Cookie *cookie, NSUInteger idx, BOOL *stop) {
             // create new cookie sprite
             SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:[cookie spriteName]];
+            
+            if (cookie.cookieType == SkullType) {
+                SKLabelNode *attackCounterLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"%ld", (long)cookie.attackTurnsCounter]];
+                attackCounterLabel.fontSize = 10.0;
+                attackCounterLabel.fontColor = [UIColor whiteColor];
+                attackCounterLabel.position = CGPointMake(-TileWidth/2.0 + attackCounterLabel.frame.size.width/2.0, -TileHeight/2.0); // bottom left
+                [sprite addChild:attackCounterLabel];
+                cookie.attackTurnsCounterLabel = attackCounterLabel;
+            }
+            
             sprite.position = [self pointForColumn:cookie.column row:startRow];
             [self.cookiesLayer addChild:sprite];
             cookie.sprite = sprite;
@@ -341,6 +351,14 @@ static const CGFloat TileHeight = 36.0;
     // wait until all animations before continuing
     [self runAction:[SKAction sequence:@[[SKAction waitForDuration:longestDuration],
                                          [SKAction runBlock:completion]]]];
+}
+
+- (void)animateAttackCountersForCookies:(NSSet *)cookies completion:(dispatch_block_t)completion {
+    for (Cookie *cookie in cookies) {
+        cookie.attackTurnsCounterLabel.text = [NSString stringWithFormat:@"%ld", (long)cookie.attackTurnsCounter];
+    }
+    
+    completion();
 }
 
 - (void)showSelectionIndicatorForCookie:(Cookie *)cookie {
